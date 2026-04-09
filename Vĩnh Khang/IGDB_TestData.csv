@@ -1,0 +1,11 @@
+test_case,query,expected_status
+TC01_BoundaryMaxLimit,fields name; limit 500;,200
+TC02_ExceedMaxLimit,fields name; limit 501;,403
+TC03_NegativeOffset,fields name; limit 10; offset -1;,400
+TC04_LogicOperator,fields name; where (rating > 80 & rating < 90) | id = 1000;,200
+TC05_InvalidDataType,"fields name; where id = ""abc"";",400
+TC06_InvalidField,fields name; truong_ao;,400
+TC07_MissingSemicolon,fields name,400
+TC08_InvalidOperator,fields name; where rating => 80;,400
+TC09_StrictDataType,"fields name; where id = ""10"";",400
+TC10_BoundaryWithBigOffset,fields name; limit 10; offset 10000000;,400
