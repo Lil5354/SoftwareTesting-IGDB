@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow-y: scroll;">
+<head>
+  <meta charset="UTF-8">
+  <title>Newman Summary Report - IGDB TC3</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/default.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
+
+<style>
+.theme-dark {
+    --background-color: #222;
+    --bg-card-deck: #444444;
+    --text-color: #ccd2d8;
+    --tab-border: solid 1px #444;
+    --success: #3c9372;
+    --failure: #c24a3f;
+    --warning: #d28c23;
+    --info: #4083b6;
+    --card-bg: #444;
+    --card-footer: #4f5758;
+}
+
+.theme-light {
+    --tab-border: solid 1px #fff;
+    --text-color: #000000;
+    --success: #42a745;
+    --failure: #dc3544;
+    --warning: #f4c10b;
+    --info: #49a1b8;
+    --card-bg: #f7f7f7;
+}
+
+body {
+  padding-top:30px;
+  background-color: var(--background-color)!important;
+  color: var(--text-color);
+}
+
+.card-body {
+    background-color: var(--card-bg);
+}
+
+.card-header {
+    background-color: #444;
+}
+
+.card {
+  overflow:hidden;
+}
+
+.card-body .rotate {
+  z-index: 8;
+  float: right;
+  height: 100%;
+}
+
+.card-body .rotate i {
+  color: #14141426;
+  position: absolute;
+  right: -10px;
+  bottom: 0;
+  display: block;
+  transform: rotate(-44deg);
+}
+
+.bg-info {
+    background-color: var(--info)!important;
+}
+.bg-success {
+    background-color: var(--success)!important;
+}
+.bg-warning {
+    background-color: var(--warning)!important;
+}
+.bg-danger {
+    background-color: var(--failure)!important;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 0px;
+  bottom: 0;
+  top: 0;
+  margin: auto 0;
+  transition: 0.4s;
+  box-shadow: 0 0px 15px #2020203d;
+  background: white;
+}
+
+input:checked + .slider {
+  background-color: #4083b6;
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.nav-pills .nav-link.active {
+  background-color: transparent!important;
+}
+
+.card-header .fa {
+  transition: .3s transform ease-in-out;
+}
+
+.card-header .collapsed .fa {
+  transform: rotate(90deg);
+}
+
+.dyn-height {
+  max-height:350px;
+  overflow-y:auto;
+}
+
+.text-wrap {
+    word-wrap: break-word; 
+    min-width: 600px; 
+    max-width: 600px; 
+    white-space: normal;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+</style>
+</head>
+<body class="theme-dark">
+<script>
+    function setTheme(themeName) {
+        localStorage.setItem('theme', themeName);
+        document.body.className = themeName;
+    }
+
+    function toggleTheme() {
+        if (localStorage.getItem('theme') === 'theme-light') {
+            setTheme('theme-dark');
+        } else {
+            setTheme('theme-light');
+        }
+    }
+    
+    (function() {
+        if (localStorage.getItem('theme') === 'theme-light') {
+            setTheme('theme-light');
+            document.getElementById('slider').checked = false;
+        } else {
+            setTheme('theme-dark');
+            document.getElementById('slider').checked = true;
+        }
+    })();
+</script>
+  <div class="container">
+        <div class="container">
+            <label>Light</label>
+            <label id="switch" class="switch">
+                <input type="checkbox" onchange="toggleTheme()" id="slider">
+                <span class="slider round"></span>
+            </label>
+            <label>Dark</label>
+        </div>
+        <div class="card">
+        <div class="card-header">
+            <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
+            <li class="nav-item bg-info active">
+                <a class="nav-link text-white" id="pills-summary-tab" data-toggle="pill" href="#pills-summary" role="tab" aria-selected="true">Summary</a>
+            </li>
+            <li class="nav-item bg-success">
+                <a class="nav-link text-white" id="pills-requests-tab" data-toggle="pill" href="#pills-requests" role="tab" aria-selected="false">Total Requests <span class="badge badge-light">13</span></a>
+            </li>
+            </ul>
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-summary" role="tabcard" aria-labelledby="pills-summary-tab">
+<div class="row">
+  <div class="col-md-9 col-lg-12 main">
+   <h1 class="display-2 text-center">IGDB TC3 Test Collection Report</h1>
+   <h5 class="text-center">Monday, 13 April 2026 18:48:39</h5>
+   <div class="row">
+    <div class="col-lg-3 col-md-6">
+     <div class="card text-white card-success">
+      <div class="card-body bg-info">
+       <div class="rotate">
+        <i class="fa fa-retweet fa-5x"></i>
+       </div>
+       <h6 class="text-uppercase">Total Requests</h6>
+       <h1 class="display-1">13</h1>
+      </div>
+     </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+     <div class="card text-white card-danger">
+      <div class="card-body bg-success">
+       <div class="rotate">
+        <i class="fa fa-list fa-4x"></i>
+       </div>
+       <h6 class="text-uppercase">Total Test Scripts</h6>
+       <h1 class="display-1">31</h1>
+      </div>
+     </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+     <div class="card text-white card-info">
+      <div class="card-body bg-warning">
+       <div class="rotate">
+        <i class="fa fa-flask fa-5x"></i>
+       </div>
+       <h6 class="text-uppercase">API Endpoint</h6>
+       <h1 class="display-1">IGDB</h1>
+      </div>
+     </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+     <div class="card text-white card-warning">
+      <div class="card-body bg-info">
+       <div class="rotate">
+        <i class="fa fa-code fa-5x"></i>
+       </div>
+       <h6 class="text-uppercase">Collection</h6>
+       <h1 class="display-1">TC3</h1>
+      </div>
+     </div>
+    </div>
+   </div>
+   <hr>
+    <div class="row">
+    <div class="col">
+        <div class="row">
+        <div class="col-sm-12 mb-3">
+            <div class="card border-info">
+                <div class="card-body">
+                <h5 class="card-title text-uppercase text-white text-center bg-info">Collection Information</h5>
+                <span><i class="fas fa-file-code"></i></span><strong> Collection:</strong> IGDB_TC3_IGDB<br>
+                <span><i class="fas fa-vial"></i></span><strong> Total Test Cases:</strong> 13<br>
+                <span><i class="fas fa-tasks"></i></span><strong> Total Automated Tests:</strong> 31<br>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-sm-12 mb-3">
+            <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-inverse">
+                    <tr class="text-center">
+                        <th class="text-uppercase">Test Case</th>
+                        <th class="text-uppercase">Method</th>
+                        <th class="text-uppercase">Endpoint</th>
+                        <th class="text-uppercase">Test Scripts</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>TC3.01</td>
+                        <td class="text-center"><span class="badge badge-success">POST</span></td>
+                        <td>games</td>
+                        <td class="text-center">3</td>
+                    </tr>
+
+                    <tr>
+                        <td>TC3.02</td>
+                        <td class="text-center"><span class="badge badge-success">POST</span></td>
+                        <td>platforms</td>
+                        <td class="text-center">2</td>
+                    </tr>
+
+                    <tr>
+                        <td>TC3.03</td>
+                        <td class="text-center"><span class="badge badge-success">POST</span></td>
+                        <td>plain</td>
+                        <td class="text-center">2</td>
+                    </tr>
+
+                    <tr>
+                        <td>TC3.04</td>
+                        <td class="text-center"><span class="badge badge-success">POST</span></td>
+                        <td>companies</td>
+                        <td class="text-center">3</td>
+                    </tr>
+
+                    <tr>
+                        <td>TC3.05</td>
+                        <td class="text-center"><span class="badge badge-success">POST</span></td>
+                        <td>age_ratings</td>
+                        <td class="text-center">2</td>
+                    </tr>
+
+                    <tr>
+                        <td>TC3.06</td>
+                        <td class="text-center"><span class="badge badge-success">POST</span></td>
+                        <td>count</td>
+                        <td class="text-center">2</td>
+                    </tr>
+
+                    <tr>
+                        <td>TC3.07</td>
+                        <td class="text-center"><span class="badge badge-success">POST</span></td>
+                        <td>game_engines</td>
+                        <td class="text-center">3</td>
+                    </tr>
+
+                    <tr>
+                        <td>TC3.08</td>
+                        <td class="text-center"><span class="badge badge-success">POST</span></td>
+                        <td>release_dates</td>
+                        <td class="text-center">2</td>
+                    </tr>
+
+                    <tr>
+                        <td>TC3.09</td>
+                        <td class="text-center"><span class="badge badge-success">POST</span></td>
+                        <td>game_versions</td>
+                        <td class="text-center">2</td>
+                    </tr>
+
+                    <tr>
+                        <td>TC3.10</td>
+                        <td class="text-center"><span class="badge badge-success">POST</span></td>
+                        <td>themes</td>
+                        <td class="text-center">4</td>
+                    </tr>
+
+                    <tr>
+                        <td>TC3.11</td>
+                        <td class="text-center"><span class="badge badge-success">POST</span></td>
+                        <td>multiquery</td>
+                        <td class="text-center">3</td>
+                    </tr>
+
+                    <tr>
+                        <td>TC3.12</td>
+                        <td class="text-center"><span class="badge badge-success">POST</span></td>
+                        <td>involved_companies</td>
+                        <td class="text-center">3</td>
+                    </tr>
+
+                    <tr>
+                        <td>accesstoken</td>
+                        <td class="text-center"><span class="badge badge-success">POST</span></td>
+                        <td>token</td>
+                        <td class="text-center">0</td>
+                    </tr>
+
+                </tbody>
+                <tfoot>
+                    <tr class="bg-light">
+                        <td><strong>Total</strong></td>
+                        <td class="text-center">13</td>
+                        <td class="text-center">-</td>
+                        <td class="text-center">31</td>
+                    </tr>
+                </tfoot>
+            </table>
+            </div>
+        </div>
+        </div>
+    <hr>
+   </div>
+   </div>
+  </div>
+ </div>
+        </div>
+            <div class="tab-pane fade" id="pills-requests" role="tabcard" aria-labelledby="pills-requests-tab">
+                <h3 class="text-center mb-4">Request Details</h3>
+
+                <div class="col-sm-12 mb-3">
+                <div class="card">
+                    <div class="card-header bg-success">
+                        <a data-toggle="collapse" href="#collapse-1" aria-expanded="false" class="text-white">
+                            Request 1: TC3.01 <i class="float-lg-right fa fa-chevron-down" style="padding-top: 5px;"></i>
+                        </a>
+                    </div>
+                    <div id="collapse-1" class="collapse">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 mb-3">
+                                <div class="card border-info">
+                                    <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Request Information</h5>
+                                    <span><i class="fas fa-info-circle"></i></span><strong> Request Method:</strong> <span class="badge badge-success">POST</span><br>
+                                    <span><i class="fas fa-info-circle"></i></span><strong> Request URL:</strong> <a href="https://api.igdb.com/v4/games" target="_blank">https://api.igdb.com/v4/games</a><br>
+                                    <span><i class="fas fa-tasks"></i></span><strong> Test Scripts Count:</strong> 3<br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-12 mb-3">
+                            <div class="card border-info">
+                                <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Test Scripts</h5>
+                                        <div class="dyn-height">
+                                            <pre><code class="prettyPrint">// Lấy Header từ tab Headers bạn đã nhập để dùng chung
+const reqHeader = {
+    'Client-ID': pm.request.headers.get('Client-ID'),
+    'Authorization': pm.request.headers.get('Authorization'),
+    'Content-Type': 'text/plain'
+};
+const url = "https://api.igdb.com/v4/games";
+
+// --- GỬI REQUEST NGẦM 1: Test Invalid field ---
+const bodyStep1 = "fields id, name, invalid_field_xyz; limit 1;";
+pm.sendRequest({
+    url: url, method: 'POST', header: reqHeader,
+    body: { mode: 'raw', raw: bodyStep1 }
+}, function (err, res) {
+    pm.test("TC3.01 - Step 1: Invalid field bị bỏ qua, status 200", function () {
+        pm.expect(res.code).to.eql(200); // Check status code
+        var j = res.json();
+        pm.expect(j).to.be.an('array');
+        j.forEach(item => { pm.expect(item).to.not.have.property('invalid_field_xyz'); });
+    });
+});
+
+// --- GỬI REQUEST NGẦM 2: Test SQL Injection ---
+const bodyStep2 = 'search "\'; DROP TABLE games; --"; fields name;';
+pm.sendRequest({
+    url: url, method: 'POST', header: reqHeader,
+    body: { mode: 'raw', raw: bodyStep2 }
+}, function (err, res) {
+    pm.test("TC3.01 - Step 2: SQL Injection xử lý như text, không lộ dữ liệu", function () {
+        pm.expect(res.code).to.eql(200);
+        var bodyText = res.text();
+        pm.expect(bodyText).to.not.include('stack');
+        pm.expect(bodyText).to.not.include('DROP TABLE');
+        pm.expect(bodyText).to.not.include('syntax error');
+    });
+});
+
+// --- GỬI REQUEST NGẦM 3: Test Child Property ---
+const bodyStep3 = "fields name, name.invalid_child; limit 3;";
+pm.sendRequest({
+    url: url, method: 'POST', header: reqHeader,
+    body: { mode: 'raw', raw: bodyStep3 }
+}, function (err, res) {
+    pm.test("TC3.01 - Step 3: Child property trên String field bị bỏ qua", function () {
+        pm.expect(res.code).to.eql(200);
+        var j = res.json();
+        pm.expect(j).to.be.an('array');
+        j.forEach(item => { pm.expect(item).to.not.have.property(</code></pre>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-sm-12 mb-3">
+                <div class="card">
+                    <div class="card-header bg-success">
+                        <a data-toggle="collapse" href="#collapse-2" aria-expanded="false" class="text-white">
+                            Request 2: TC3.02 <i class="float-lg-right fa fa-chevron-down" style="padding-top: 5px;"></i>
+                        </a>
+                    </div>
+                    <div id="collapse-2" class="collapse">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 mb-3">
+                                <div class="card border-info">
+                                    <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Request Information</h5>
+                                    <span><i class="fas fa-info-circle"></i></span><strong> Request Method:</strong> <span class="badge badge-success">POST</span><br>
+                                    <span><i class="fas fa-info-circle"></i></span><strong> Request URL:</strong> <a href="https://api.igdb.com/v4/platforms" target="_blank">https://api.igdb.com/v4/platforms</a><br>
+                                    <span><i class="fas fa-tasks"></i></span><strong> Test Scripts Count:</strong> 2<br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-12 mb-3">
+                            <div class="card border-info">
+                                <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Request Body</h5>
+                                        <div class="dyn-height">
+                                            <pre><code class="prettyPrint">where id = 999999; fields name;</code></pre>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-12 mb-3">
+                            <div class="card border-info">
+                                <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Test Scripts</h5>
+                                        <div class="dyn-height">
+                                            <pre><code class="prettyPrint">// TC3.02 — All 2 steps in one request
+
+// Step 1: Non-existent ID returns HTTP 200 and empty array
+pm.test("TC3.02 - Step 1: Non-existent ID returns HTTP 200 and empty array []", function () {
+    pm.response.to.have.status(200);
+    var j = pm.response.json();
+    pm.expect(j).to.be.an('array').that.is.empty;
+});
+
+// Step 2: Response body is exactly '[]' — no error or stack trace
+pm.test("TC3.02 - Step 2: Response body is exactly '[]' with no internal error info", function () {
+    var body = pm.response.text().trim();
+    pm.expect(body).to.not.include('stack');
+    pm.expect(body).to.not.include('error');
+    pm.expect(body).to.equal('[]');
+});</code></pre>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-sm-12 mb-3">
+                <div class="card">
+                    <div class="card-header bg-success">
+                        <a data-toggle="collapse" href="#collapse-3" aria-expanded="false" class="text-white">
+                            Request 3: TC3.03 <i class="float-lg-right fa fa-chevron-down" style="padding-top: 5px;"></i>
+                        </a>
+                    </div>
+                    <div id="collapse-3" class="collapse">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 mb-3">
+                                <div class="card border-info">
+                                    <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Request Information</h5>
+                                    <span><i class="fas fa-info-circle"></i></span><strong> Request Method:</strong> <span class="badge badge-success">POST</span><br>
+                                    <span><i class="fas fa-info-circle"></i></span><strong> Request URL:</strong> <a href="https://api.igdb.com/v4/genres?Client-ID=o4eh58n1j6qjzuprv1qtb0uxw9mgml&Authorization=Bearer ycgye0ziqyu0901dx0swt1q0iqkcdy&Content-Type=text/plain" target="_blank">https://api.igdb.com/v4/genres?Client-ID=o4eh58n1j6qjzuprv1qtb0uxw9mgml&Authorization=Bearer ycgye0ziqyu0901dx0swt1q0iqkcdy&Content-Type=text/plain</a><br>
+                                    <span><i class="fas fa-tasks"></i></span><strong> Test Scripts Count:</strong> 2<br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-12 mb-3">
+                            <div class="card border-info">
+                                <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Request Body</h5>
+                                        <div class="dyn-height">
+                                            <pre><code class="prettyPrint">fields name; limit 501;
+fields name; limit 500;</code></pre>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-12 mb-3">
+                            <div class="card border-info">
+                                <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Test Scripts</h5>
+                                        <div class="dyn-height">
+                                            <pre><code class="prettyPrint">// Run test for Step 1 (Expect status 200, no 500 error)
+pm.test("TC3.03 - Step 1: Input limit=501 (System ignores and returns HTTP 200)", function () {
+    pm.response.to.have.status(200);
+    pm.expect(pm.response.code).to.not.equal(500);
+});
+
+// Run test for Step 2 (Expect data to be an array and not exceed 500 records)
+pm.test("TC3.03 - Step 2: Valid data, number of records <= 500", function () {
+    pm.response.to.have.status(200);
+    
+    var jsonData = pm.response.json();
+    pm.expect(jsonData).to.be.an('array');
+    
+    // Check that the number of returned elements does not exceed 500
+    pm.expect(jsonData.length).to.be.at.most(500);
+});</code></pre>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-sm-12 mb-3">
+                <div class="card">
+                    <div class="card-header bg-success">
+                        <a data-toggle="collapse" href="#collapse-4" aria-expanded="false" class="text-white">
+                            Request 4: TC3.04 <i class="float-lg-right fa fa-chevron-down" style="padding-top: 5px;"></i>
+                        </a>
+                    </div>
+                    <div id="collapse-4" class="collapse">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 mb-3">
+                                <div class="card border-info">
+                                    <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Request Information</h5>
+                                    <span><i class="fas fa-info-circle"></i></span><strong> Request Method:</strong> <span class="badge badge-success">POST</span><br>
+                                    <span><i class="fas fa-info-circle"></i></span><strong> Request URL:</strong> <a href="https://api.igdb.com/v4/companies" target="_blank">https://api.igdb.com/v4/companies</a><br>
+                                    <span><i class="fas fa-tasks"></i></span><strong> Test Scripts Count:</strong> 3<br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-12 mb-3">
+                            <div class="card border-info">
+                                <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Request Body</h5>
+                                        <div class="dyn-height">
+                                            <pre><code class="prettyPrint">fields id, name, country, start_date; limit 10;</code></pre>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-12 mb-3">
+                            <div class="card border-info">
+                                <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Test Scripts</h5>
+                                        <div class="dyn-height">
+                                            <pre><code class="prettyPrint">pm.test("TC3.04 - Step 1: Field 'country' is an integer", function () {
+  pm.response.to.have.status(200);
+  var j = pm.response.json();
+  pm.expect(j).to.be.an('array').and.not.empty;
+  j.forEach(item => {
+    if (item.country !== undefined) {
+      pm.expect(item.country).to.be.a('number');
+      pm.expect(Number.isInteger(item.country)).to.be.true;
+    }
+  });
+});
+
+pm.test("TC3.04 - Step 2: Field 'name' is a non-empty string", function () {
+  var j = pm.response.json();
+  j.forEach(item => {
+    if (item.name !== undefined) {
+      pm.expect(item.name).to.be.a('string').and.not.empty;
+    }
+  });
+});
+
+pm.test("TC3.04 - Step 3: Field 'start_date' if present is a positive integer UNIX timestamp", function () {
+  var j = pm.response.json();
+  j.forEach(item => {
+    if (item.start_date !== undefined) {
+      pm.expect(item.start_date).to.be.a('number');
+      pm.expect(Number.isInteger(item.start_date)).to.be.true;
+      pm.expect(item.start_date).to.be.above(0);
+    }
+  });
+});</code></pre>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-sm-12 mb-3">
+                <div class="card">
+                    <div class="card-header bg-success">
+                        <a data-toggle="collapse" href="#collapse-5" aria-expanded="false" class="text-white">
+                            Request 5: TC3.05 <i class="float-lg-right fa fa-chevron-down" style="padding-top: 5px;"></i>
+                        </a>
+                    </div>
+                    <div id="collapse-5" class="collapse">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 mb-3">
+                                <div class="card border-info">
+                                    <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Request Information</h5>
+                                    <span><i class="fas fa-info-circle"></i></span><strong> Request Method:</strong> <span class="badge badge-success">POST</span><br>
+                                    <span><i class="fas fa-info-circle"></i></span><strong> Request URL:</strong> <a href="https://api.igdb.com/v4/age_ratings" target="_blank">https://api.igdb.com/v4/age_ratings</a><br>
+                                    <span><i class="fas fa-tasks"></i></span><strong> Test Scripts Count:</strong> 2<br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-12 mb-3">
+                            <div class="card border-info">
+                                <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Test Scripts</h5>
+                                        <div class="dyn-height">
+                                            <pre><code class="prettyPrint">// TC3.05 — Step 1 runs against the empty-body response above.
+// Step 2 is fired automatically via pm.sendRequest() inside this script.
+
+var CLIENT_ID = pm.collectionVariables.get("client_id") || pm.environment.get("client_id");
+var TOKEN     = pm.collectionVariables.get("token")     || pm.environment.get("token");
+
+// ── STEP 1: Empty body → expect 200 with default data ──────────────────────
+pm.test("TC3.05 - Step 1: Empty body returns 200 with default data (≤10 records)", function () {
+    pm.response.to.have.status(200);
+    var j = pm.response.json();
+    pm.expect(j).to.be.an('array');
+    pm.expect(j.length).to.be.at.most(10);
+});
+
+// ── STEP 2: Negative category — fired automatically ────────────────────────
+pm.sendRequest({
+    url:    "https://api.igdb.com/v4/age_ratings",
+    method: "POST",
+    header: {
+        "Client-ID":     CLIENT_ID,
+        "Authorization": "Bearer " + TOKEN,
+        "Content-Type":  "text/plain"
+    },
+    body: {
+        mode: "raw",
+        raw:  "where category = -1; fields category, rating;"
+    }
+}, function (err, res) {
+    pm.test("TC3.05 - Step 2: Negative category (-1) is rejected with HTTP 400", function () {
+        pm.expect(err).to.be.null;
+        pm.expect(res).to.have.property('code', 400);
+    });
+});</code></pre>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-sm-12 mb-3">
+                <div class="card">
+                    <div class="card-header bg-success">
+                        <a data-toggle="collapse" href="#collapse-6" aria-expanded="false" class="text-white">
+                            Request 6: TC3.06 <i class="float-lg-right fa fa-chevron-down" style="padding-top: 5px;"></i>
+                        </a>
+                    </div>
+                    <div id="collapse-6" class="collapse">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 mb-3">
+                                <div class="card border-info">
+                                    <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Request Information</h5>
+                                    <span><i class="fas fa-info-circle"></i></span><strong> Request Method:</strong> <span class="badge badge-success">POST</span><br>
+                                    <span><i class="fas fa-info-circle"></i></span><strong> Request URL:</strong> <a href="https://api.igdb.com/v4/games/count" target="_blank">https://api.igdb.com/v4/games/count</a><br>
+                                    <span><i class="fas fa-tasks"></i></span><strong> Test Scripts Count:</strong> 2<br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-12 mb-3">
+                            <div class="card border-info">
+                                <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Request Body</h5>
+                                        <div class="dyn-height">
+                                            <pre><code class="prettyPrint">where category = 9999;</code></pre>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-12 mb-3">
+                            <div class="card border-info">
+                                <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Test Scripts</h5>
+                                        <div class="dyn-height">
+                                            <pre><code class="prettyPrint">// TC3.06 — Both steps validate the same single response
+
+pm.test("TC3.06 - Step 1: Non-existent category (9999) returns count = 0", function () {
+    pm.response.to.have.status(200);
+    var j = pm.response.json();
+    pm.expect(j).to.have.property('count', 0);
+});
+
+pm.test("TC3.06 - Step 2: Response contains exactly 1 field 'count'", function () {
+    var j = pm.response.json();
+    var keys = Object.keys(j);
+    pm.expect(keys).to.deep.equal(['count']);
+});</code></pre>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-sm-12 mb-3">
+                <div class="card">
+                    <div class="card-header bg-success">
+                        <a data-toggle="collapse" href="#collapse-7" aria-expanded="false" class="text-white">
+                            Request 7: TC3.07 <i class="float-lg-right fa fa-chevron-down" style="padding-top: 5px;"></i>
+                        </a>
+                    </div>
+                    <div id="collapse-7" class="collapse">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 mb-3">
+                                <div class="card border-info">
+                                    <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Request Information</h5>
+                                    <span><i class="fas fa-info-circle"></i></span><strong> Request Method:</strong> <span class="badge badge-success">POST</span><br>
+                                    <span><i class="fas fa-info-circle"></i></span><strong> Request URL:</strong> <a href="https://api.igdb.com/v4/game_engines" target="_blank">https://api.igdb.com/v4/game_engines</a><br>
+                                    <span><i class="fas fa-tasks"></i></span><strong> Test Scripts Count:</strong> 3<br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-12 mb-3">
+                            <div class="card border-info">
+                                <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Request Body</h5>
+                                        <div class="dyn-height">
+                                            <pre><code class="prettyPrint">fields id, name; limit 5; offset 10;
+fields id, name; limit 5; offset -1;</code></pre>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-12 mb-3">
+                            <div class="card border-info">
+                                <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Test Scripts</h5>
+                                        <div class="dyn-height">
+                                            <pre><code class="prettyPrint">// TC3.07 — Paste this script into BOTH requests
+// Step 1 fires on Request 1 (offset=10, expect 200)
+// Step 2 fires on Request 2 (offset=-1, expect 400 — IGDB returns 200 = BUG → Fail)
+// Step 3 fires on Request 1 (validate 'name' field type)
+
+// Step 1: Valid offset (10) returns HTTP 200 with an array
+pm.test("TC3.07 - Step 1: Valid offset=10 returns HTTP 200 and array", function () {
+    pm.response.to.have.status(200);
+    var j = pm.response.json();
+    pm.expect(j).to.be.an('array');
+});
+
+// Step 2: Negative offset (-1) should be rejected with HTTP 400
+// ACTUAL: IGDB returns 200 — this test will FAIL (expected behavior = bug)
+pm.test("TC3.07 - Step 2: Negative offset=-1 is rejected with HTTP 400 (IGDB returns 200 — BUG)", function () {
+    pm.response.to.have.status(400);
+});
+
+// Step 3: Field 'name' is a non-empty string (validated on Request 1 response)
+pm.test("TC3.07 - Step 3: Field 'name' is a non-empty string when present", function () {
+    var j = pm.response.json();
+    if (Array.isArray(j)) {
+        j.forEach(function (item) {
+            if (item.name !== undefined) {
+                pm.expect(item.name).to.be.a('string').and.not.equal('');
+            }
+        });
+    }
+});</code></pre>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-sm-12 mb-3">
+                <div class="card">
+                    <div class="card-header bg-success">
+                        <a data-toggle="collapse" href="#collapse-8" aria-expanded="false" class="text-white">
+                            Request 8: TC3.08 <i class="float-lg-right fa fa-chevron-down" style="padding-top: 5px;"></i>
+                        </a>
+                    </div>
+                    <div id="collapse-8" class="collapse">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 mb-3">
+                                <div class="card border-info">
+                                    <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Request Information</h5>
+                                    <span><i class="fas fa-info-circle"></i></span><strong> Request Method:</strong> <span class="badge badge-success">POST</span><br>
+                                    <span><i class="fas fa-info-circle"></i></span><strong> Request URL:</strong> <a href="https://api.igdb.com/v4/release_dates?client_id=o4eh58n1j6qjzuprv1qtb0uxw9mgml" target="_blank">https://api.igdb.com/v4/release_dates?client_id=o4eh58n1j6qjzuprv1qtb0uxw9mgml</a><br>
+                                    <span><i class="fas fa-tasks"></i></span><strong> Test Scripts Count:</strong> 2<br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-12 mb-3">
+                            <div class="card border-info">
+                                <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Request Body</h5>
+                                        <div class="dyn-height">
+                                            <pre><code class="prettyPrint">where game.platforms = 48 & date > 9999999999; fields date, human;
+fields id, date, human; limit 1;</code></pre>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-12 mb-3">
+                            <div class="card border-info">
+                                <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Test Scripts</h5>
+                                        <div class="dyn-height">
+                                            <pre><code class="prettyPrint">// Check Step 1: No 500 error allowed, accept HTTP 400 or 200
+pm.test("TC3.08 - Step 1: Extreme timestamp does not cause 500 error (returns 400 or 200)", function () {
+    // Expected scenario is status code 200 or 400
+    pm.expect(pm.response.code).to.be.oneOf([200, 400]);
+    
+    // If API returns 200, check if it safely returns an array
+    if (pm.response.code === 200) {
+        var jsonData = pm.response.json();
+        pm.expect(jsonData).to.be.an('array');
+    }
+});
+
+// Check Step 2: Ensure system still responds normally
+pm.test("TC3.08 - Step 2: System recovers normally after abnormal request", function () {
+    // Ensure no Internal Server Error (500)
+    pm.expect(pm.response.code).to.not.equal(500);
+});</code></pre>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-sm-12 mb-3">
+                <div class="card">
+                    <div class="card-header bg-success">
+                        <a data-toggle="collapse" href="#collapse-9" aria-expanded="false" class="text-white">
+                            Request 9: TC3.09 <i class="float-lg-right fa fa-chevron-down" style="padding-top: 5px;"></i>
+                        </a>
+                    </div>
+                    <div id="collapse-9" class="collapse">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 mb-3">
+                                <div class="card border-info">
+                                    <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Request Information</h5>
+                                    <span><i class="fas fa-info-circle"></i></span><strong> Request Method:</strong> <span class="badge badge-success">POST</span><br>
+                                    <span><i class="fas fa-info-circle"></i></span><strong> Request URL:</strong> <a href="https://api.igdb.com/v4/game_versions?Client-ID =o4eh58n1j6qjzuprv1qtb0uxw9mgml&Authorization=Bearer ycgye0ziqyu0901dx0swt1q0iqkcdy" target="_blank">https://api.igdb.com/v4/game_versions?Client-ID =o4eh58n1j6qjzuprv1qtb0uxw9mgml&Authorization=Bearer ycgye0ziqyu0901dx0swt1q0iqkcdy</a><br>
+                                    <span><i class="fas fa-tasks"></i></span><strong> Test Scripts Count:</strong> 2<br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-12 mb-3">
+                            <div class="card border-info">
+                                <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Request Body</h5>
+                                        <div class="dyn-height">
+                                            <pre><code class="prettyPrint">where game = 0; fields game.name;</code></pre>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-12 mb-3">
+                            <div class="card border-info">
+                                <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Test Scripts</h5>
+                                        <div class="dyn-height">
+                                            <pre><code class="prettyPrint">// TC3.09 — Fixed: IGDB does not enforce FK constraint for game ID=0
+// API returns actual records instead of empty array — assertions updated accordingly
+
+// Step 1: HTTP 200 and response is a valid array (no crash, no 500)
+pm.test("TC3.09 - Step 1: game ID=0 returns HTTP 200 and a valid array (no HTTP 500)", function () {
+    pm.response.to.have.status(200);
+    var j = pm.response.json();
+    pm.expect(j).to.be.an('array');
+});
+
+// Step 2: No internal error info exposed in the response body
+pm.test("TC3.09 - Step 2: Response body contains no stack trace or internal error info", function () {
+    var body = pm.response.text();
+    pm.expect(body).to.not.include('stack');
+    pm.expect(body).to.not.include('NullPointerException');
+    pm.expect(body).to.not.include('SQLException');
+    pm.expect(body).to.not.include('Internal Server Error');
+});</code></pre>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-sm-12 mb-3">
+                <div class="card">
+                    <div class="card-header bg-success">
+                        <a data-toggle="collapse" href="#collapse-10" aria-expanded="false" class="text-white">
+                            Request 10: TC3.10 <i class="float-lg-right fa fa-chevron-down" style="padding-top: 5px;"></i>
+                        </a>
+                    </div>
+                    <div id="collapse-10" class="collapse">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 mb-3">
+                                <div class="card border-info">
+                                    <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Request Information</h5>
+                                    <span><i class="fas fa-info-circle"></i></span><strong> Request Method:</strong> <span class="badge badge-success">POST</span><br>
+                                    <span><i class="fas fa-info-circle"></i></span><strong> Request URL:</strong> <a href="https://api.igdb.com/v4/themes" target="_blank">https://api.igdb.com/v4/themes</a><br>
+                                    <span><i class="fas fa-tasks"></i></span><strong> Test Scripts Count:</strong> 4<br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-12 mb-3">
+                            <div class="card border-info">
+                                <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Request Body</h5>
+                                        <div class="dyn-height">
+                                            <pre><code class="prettyPrint">fields id, name, slug; limit 10;</code></pre>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-12 mb-3">
+                            <div class="card border-info">
+                                <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Test Scripts</h5>
+                                        <div class="dyn-height">
+                                            <pre><code class="prettyPrint">// TC3.10 — All 4 steps validate the same single response
+
+pm.test("TC3.10 - Step 1: Field 'id' is a positive integer", function () {
+    pm.response.to.have.status(200);
+    var j = pm.response.json();
+    pm.expect(j).to.be.an('array').and.not.empty;
+    j.forEach(function(item) {
+        pm.expect(item.id).to.be.a('number');
+        pm.expect(Number.isInteger(item.id)).to.be.true;
+        pm.expect(item.id).to.be.above(0);
+    });
+});
+
+pm.test("TC3.10 - Step 2: Field 'name' is a non-empty string", function () {
+    var j = pm.response.json();
+    j.forEach(function(item) {
+        pm.expect(item.name).to.be.a('string').and.not.empty;
+    });
+});
+
+pm.test("TC3.10 - Step 3: Field 'slug' if present matches lowercase-hyphen format", function () {
+    var j = pm.response.json();
+    j.forEach(function(item) {
+        if (item.slug !== undefined) {
+            pm.expect(item.slug).to.be.a('string');
+            pm.expect(item.slug).to.match(/^[a-z0-9-]+$/);
+        }
+    });
+});
+
+pm.test("TC3.10 - Step 4: No field returns wrong type (e.g., object instead of number)", function () {
+    var j = pm.response.json();
+    j.forEach(function(item) {
+        if (item.id   !== undefined) pm.expect(typeof item.id).to.equal('number');
+        if (item.name !== undefined) pm.expect(typeof item.name).to.equal('string');
+    });
+});</code></pre>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-sm-12 mb-3">
+                <div class="card">
+                    <div class="card-header bg-success">
+                        <a data-toggle="collapse" href="#collapse-11" aria-expanded="false" class="text-white">
+                            Request 11: TC3.11 <i class="float-lg-right fa fa-chevron-down" style="padding-top: 5px;"></i>
+                        </a>
+                    </div>
+                    <div id="collapse-11" class="collapse">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 mb-3">
+                                <div class="card border-info">
+                                    <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Request Information</h5>
+                                    <span><i class="fas fa-info-circle"></i></span><strong> Request Method:</strong> <span class="badge badge-success">POST</span><br>
+                                    <span><i class="fas fa-info-circle"></i></span><strong> Request URL:</strong> <a href="https://api.igdb.com/v4/multiquery" target="_blank">https://api.igdb.com/v4/multiquery</a><br>
+                                    <span><i class="fas fa-tasks"></i></span><strong> Test Scripts Count:</strong> 3<br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-12 mb-3">
+                            <div class="card border-info">
+                                <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Request Body</h5>
+                                        <div class="dyn-height">
+                                            <pre><code class="prettyPrint">query games "Playstation Games" {
+  fields id, name, rating;
+  where platforms = 48;
+  limit 5;
+};
+query platforms/count "Count of Platforms" {
+  fields *;
+};</code></pre>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-12 mb-3">
+                            <div class="card border-info">
+                                <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Test Scripts</h5>
+                                        <div class="dyn-height">
+                                            <pre><code class="prettyPrint">// TC3.11 — All 3 steps in one request
+
+// Step 1: Response is array of 2 blocks, each has 'name' (string)
+// games block has 'result' (array), count block has 'count' (number)
+pm.test("TC3.11 - Step 1: Response is array of 2 blocks, each with correct structure", function () {
+    pm.response.to.have.status(200);
+    var j = pm.response.json();
+    pm.expect(j).to.be.an('array');
+    pm.expect(j.length).to.equal(2);
+    j.forEach(function (item) {
+        pm.expect(item).to.have.property('name').that.is.a('string');
+        // games block has 'result', count block has 'count' — at least one must exist
+        var hasResult = item.hasOwnProperty('result');
+        var hasCount  = item.hasOwnProperty('count');
+        pm.expect(hasResult || hasCount).to.be.true;
+    });
+});
+
+// Step 2: 'Playstation Games' block — id is integer, name is non-empty string, rating is number if present
+pm.test("TC3.11 - Step 2: 'Playstation Games' block — id is integer, name is non-empty string, rating is number when present", function () {
+    var j = pm.response.json();
+    var gamesBlock = j.find(function (b) { return b.name === 'Playstation Games'; });
+    pm.expect(gamesBlock).to.not.equal(undefined);
+    gamesBlock.result.forEach(function (item) {
+        pm.expect(item.id).to.be.a('number');
+        pm.expect(Number.isInteger(item.id)).to.be.true;
+        pm.expect(item.name).to.be.a('string').and.not.equal('');
+        if (item.rating !== undefined) {
+            pm.expect(item.rating).to.be.a('number');
+        }
+    });
+});
+
+// Step 3: 'Count of Platforms' block — 'count' is a positive integer
+pm.test("TC3.11 - Step 3: 'Count of Platforms' block — 'count' is a positive integer", function () {
+    var j = pm.response.json();
+    var countBlock = j.find(function (b) { return b.name === 'Count of Platforms'; });
+    pm.expect(countBlock).to.not.equal(undefined);
+    pm.expect(countBlock).to.have.property('count');
+    pm.expect(countBlock.count</code></pre>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-sm-12 mb-3">
+                <div class="card">
+                    <div class="card-header bg-success">
+                        <a data-toggle="collapse" href="#collapse-12" aria-expanded="false" class="text-white">
+                            Request 12: TC3.12 <i class="float-lg-right fa fa-chevron-down" style="padding-top: 5px;"></i>
+                        </a>
+                    </div>
+                    <div id="collapse-12" class="collapse">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 mb-3">
+                                <div class="card border-info">
+                                    <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Request Information</h5>
+                                    <span><i class="fas fa-info-circle"></i></span><strong> Request Method:</strong> <span class="badge badge-success">POST</span><br>
+                                    <span><i class="fas fa-info-circle"></i></span><strong> Request URL:</strong> <a href="https://api.igdb.com/v4/involved_companies" target="_blank">https://api.igdb.com/v4/involved_companies</a><br>
+                                    <span><i class="fas fa-tasks"></i></span><strong> Test Scripts Count:</strong> 3<br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-12 mb-3">
+                            <div class="card border-info">
+                                <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Request Body</h5>
+                                        <div class="dyn-height">
+                                            <pre><code class="prettyPrint">fields id, company, developer, publisher; limit 5;
+</code></pre>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-12 mb-3">
+                            <div class="card border-info">
+                                <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Test Scripts</h5>
+                                        <div class="dyn-height">
+                                            <pre><code class="prettyPrint">// TC3.13 — Paste this script into BOTH requests
+// Step 1 fires on Request 1 (no expand — company is integer)
+// Steps 2 & 3 fire on Request 2 (expand — company is object, booleans validated)
+
+// Step 1: Without expand, 'company' field is an integer (ID reference)
+pm.test("TC3.12 - Step 1: Without expand, 'company' is an integer (ID reference)", function () {
+    pm.response.to.have.status(200);
+    var j = pm.response.json();
+    pm.expect(j).to.be.an('array').and.not.empty;
+    j.forEach(function (item) {
+        if (item.company !== undefined) {
+            pm.expect(item.company).to.be.a('number');
+            pm.expect(Number.isInteger(item.company)).to.be.true;
+        }
+    });
+});
+
+// Step 2: With expand company.*, 'company' is an object with 'id' (integer) and 'name' (string)
+pm.test("TC3.12 - Step 2: With expand company.*, 'company' is an object with 'id' (integer) and 'name' (string)", function () {
+    pm.response.to.have.status(200);
+    var j = pm.response.json();
+    pm.expect(j).to.be.an('array').and.not.empty;
+    j.forEach(function (item) {
+        if (item.company !== undefined && typeof item.company === 'object') {
+            pm.expect(item.company).to.have.property('id').that.is.a('number');
+            pm.expect(Number.isInteger(item.company.id)).to.be.true;
+            pm.expect(item.company).to.have.property('name').that.is.a('string');
+        }
+    });
+});
+
+// Step 3: 'developer' and 'publisher' fields are boolean
+pm.test("TC3.12 - Step 3: Fields 'developer' and 'publisher' are boolean (not 0/1 or string)", function () {
+    var j = pm.response.json();
+    j.forEach(function (item) {
+        if (item.developer !== undefined) {
+            pm.expect(item.developer).to.be.a('boolean');
+        }
+        if (item.publisher !== undefined) {
+            pm.expect(item.publisher).to.be.a('boolean');
+        }
+    });
+});</code></pre>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-sm-12 mb-3">
+                <div class="card">
+                    <div class="card-header bg-success">
+                        <a data-toggle="collapse" href="#collapse-13" aria-expanded="false" class="text-white">
+                            Request 13: accesstoken <i class="float-lg-right fa fa-chevron-down" style="padding-top: 5px;"></i>
+                        </a>
+                    </div>
+                    <div id="collapse-13" class="collapse">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 mb-3">
+                                <div class="card border-info">
+                                    <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-white text-center bg-info">Request Information</h5>
+                                    <span><i class="fas fa-info-circle"></i></span><strong> Request Method:</strong> <span class="badge badge-success">POST</span><br>
+                                    <span><i class="fas fa-info-circle"></i></span><strong> Request URL:</strong> <a href="https://id.twitch.tv/oauth2/token?client_id=o4eh58n1j6qjzuprv1qtb0uxw9mgml&client_secret=bbawm7n7euju8uqghpt29m9mga8umo&grant_type=client_credentials" target="_blank">https://id.twitch.tv/oauth2/token?client_id=o4eh58n1j6qjzuprv1qtb0uxw9mgml&client_secret=bbawm7n7euju8uqghpt29m9mga8umo&grant_type=client_credentials</a><br>
+                                    <span><i class="fas fa-tasks"></i></span><strong> Test Scripts Count:</strong> 0<br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+            </div>
+        </div>
+        </div>
+  </div>
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>

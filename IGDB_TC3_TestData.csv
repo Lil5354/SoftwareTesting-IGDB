@@ -1,0 +1,25 @@
+test_case,query,expected_status
+TC3.01,,200
+TC3.02,where id = 999999; fields name;,200
+TC3.03,"fields name; limit 501;
+fields name; limit 500;",200
+TC3.04,"fields id, name, country, start_date; limit 10;",200
+TC3.05,,200
+TC3.06,where category = 9999;,200
+TC3.07,"fields id, name; limit 5; offset 10;
+fields id, name; limit 5; offset -1;",400
+TC3.08,"where game.platforms = 48 & date > 9999999999; fields date, human;
+fields id, date, human; limit 1;",200
+TC3.09,where game = 0; fields game.name;,200
+TC3.10,"fields id, name, slug; limit 10;",200
+TC3.11,"query games ""Playstation Games"" {
+  fields id, name, rating;
+  where platforms = 48;
+  limit 5;
+};
+query platforms/count ""Count of Platforms"" {
+  fields *;
+};",200
+TC3.12,"fields id, company, developer, publisher; limit 5;
+",200
+accesstoken,,200
