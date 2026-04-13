@@ -1,0 +1,3 @@
+Twitch's Information
+Client ID: bct28pbsah3wyrxeq0jgo00e8uvyy2
+Secret: n6g0hpxbvx1qpjwwnuu7jhrj7etqin
