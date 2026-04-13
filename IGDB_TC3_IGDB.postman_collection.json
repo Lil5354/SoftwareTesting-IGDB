@@ -1,46 +1,19 @@
 {
   "info": {
-    "_postman_id": "07a88e56-a571-46df-a000-7d8ebda72a51",
+    "_postman_id": "cdcd6b75-2ec5-4355-a957-2ee897956255",
     "name": "IGDB_TC3_IGDB",
     "description": "IGDB API Test Collection - Exported from YAML",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53747330",
+    "_collection_link": "https://go.postman.co/collection/53747330-cdcd6b75-2ec5-4355-a957-2ee897956255?source=collection_link"
   },
   "item": [
     {
       "name": "TC3.01",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "text/plain",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "https://api.igdb.com/v4/games",
-          "protocol": "https",
-          "host": [
-            "api",
-            "igdb",
-            "com"
-          ],
-          "path": [
-            "v4",
-            "games"
-          ]
-        },
-        "body": {
-          "mode": "raw",
-          "raw": ""
-        }
-      },
-      "response": [],
       "event": [
         {
           "listen": "test",
           "script": {
-            "type": "text/javascript",
             "exec": [
               "// Lấy Header từ tab Headers bạn đã nhập để dùng chung",
               "const reqHeader = {",
@@ -92,24 +65,33 @@
               "        j.forEach(item => { pm.expect(item).to.not.have.property('invalid_child'); });",
               "    });",
               "});"
-            ]
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
-      ]
-    },
-    {
-      "name": "TC3.02",
+      ],
       "request": {
         "method": "POST",
         "header": [
           {
-            "key": "Content-Type",
-            "value": "text/plain",
+            "key": "Client-ID",
+            "value": "o4eh58n1j6qjzuprv1qtb0uxw9mgml",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer 6ksgcg02t6icrelbellt3vmgm8mx7d",
             "type": "text"
           }
         ],
+        "body": {
+          "mode": "raw",
+          "raw": "fields name, genres, rating;\r\nlimit 10;"
+        },
         "url": {
-          "raw": "https://api.igdb.com/v4/platforms",
+          "raw": "https://api.igdb.com/v4/games?Client-ID=o4eh58n1j6qjzuprv1qtb0uxw9mgml&Authorization=Bearer 6ksgcg02t6icrelbellt3vmgm8mx7d",
           "protocol": "https",
           "host": [
             "api",
@@ -118,20 +100,30 @@
           ],
           "path": [
             "v4",
-            "platforms"
+            "games"
+          ],
+          "query": [
+            {
+              "key": "Client-ID",
+              "value": "o4eh58n1j6qjzuprv1qtb0uxw9mgml",
+              "type": "text"
+            },
+            {
+              "key": "Authorization",
+              "value": "Bearer 6ksgcg02t6icrelbellt3vmgm8mx7d",
+              "type": "text"
+            }
           ]
-        },
-        "body": {
-          "mode": "raw",
-          "raw": "where id = 999999; fields name;"
         }
       },
-      "response": [],
+      "response": []
+    },
+    {
+      "name": "TC3.02",
       "event": [
         {
           "listen": "test",
           "script": {
-            "type": "text/javascript",
             "exec": [
               "// TC3.02 — All 2 steps in one request",
               "",
@@ -149,13 +141,13 @@
               "    pm.expect(body).to.not.include('error');",
               "    pm.expect(body).to.equal('[]');",
               "});"
-            ]
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
-      ]
-    },
-    {
-      "name": "TC3.03",
+      ],
       "request": {
         "method": "POST",
         "header": [
@@ -163,8 +155,96 @@
             "key": "Content-Type",
             "value": "text/plain",
             "type": "text"
+          },
+          {
+            "key": "Client-ID",
+            "value": "o4eh58n1j6qjzuprv1qtb0uxw9mgml",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer 6ksgcg02t6icrelbellt3vmgm8mx7d",
+            "type": "text"
           }
         ],
+        "body": {
+          "mode": "raw",
+          "raw": "where id = 999999; fields name;"
+        },
+        "url": {
+          "raw": "https://api.igdb.com/v4/platforms",
+          "protocol": "https",
+          "host": [
+            "api",
+            "igdb",
+            "com"
+          ],
+          "path": [
+            "v4",
+            "platforms"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC3.03",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Run test for Step 1 (Expect status 200, no 500 error)",
+              "pm.test(\"TC3.03 - Step 1: Input limit=501 (System ignores and returns HTTP 200)\", function () {",
+              "    pm.response.to.have.status(200);",
+              "    pm.expect(pm.response.code).to.not.equal(500);",
+              "});",
+              "",
+              "// Run test for Step 2 (Expect data to be an array and not exceed 500 records)",
+              "pm.test(\"TC3.03 - Step 2: Valid data, number of records <= 500\", function () {",
+              "    pm.response.to.have.status(200);",
+              "    ",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.be.an('array');",
+              "    ",
+              "    // Check that the number of returned elements does not exceed 500",
+              "    pm.expect(jsonData.length).to.be.at.most(500);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/plain",
+            "type": "text"
+          },
+          {
+            "key": "Client-ID",
+            "value": "o4eh58n1j6qjzuprv1qtb0uxw9mgml",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer 6ksgcg02t6icrelbellt3vmgm8mx7d",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "fields name; limit 501;\r\nfields name; limit 500;",
+          "options": {
+            "raw": {
+              "language": "text"
+            }
+          }
+        },
         "url": {
           "raw": "https://api.igdb.com/v4/genres?Client-ID=o4eh58n1j6qjzuprv1qtb0uxw9mgml&Authorization=Bearer ycgye0ziqyu0901dx0swt1q0iqkcdy&Content-Type=text/plain",
           "protocol": "https",
@@ -189,89 +269,18 @@
             {
               "key": "Content-Type",
               "value": "text/plain"
-            },
-            {
-              "key": "Client-ID",
-              "value": "o4eh58n1j6qjzuprv1qtb0uxw9mgml"
-            },
-            {
-              "key": "Authorization",
-              "value": "Bearer ycgye0ziqyu0901dx0swt1q0iqkcdy"
-            },
-            {
-              "key": "Content-Type",
-              "value": "text/plain"
             }
           ]
-        },
-        "body": {
-          "mode": "raw",
-          "raw": "fields name; limit 501;\r\nfields name; limit 500;"
         }
       },
-      "response": [],
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "type": "text/javascript",
-            "exec": [
-              "// Run test for Step 1 (Expect status 200, no 500 error)",
-              "pm.test(\"TC3.03 - Step 1: Input limit=501 (System ignores and returns HTTP 200)\", function () {",
-              "    pm.response.to.have.status(200);",
-              "    pm.expect(pm.response.code).to.not.equal(500);",
-              "});",
-              "",
-              "// Run test for Step 2 (Expect data to be an array and not exceed 500 records)",
-              "pm.test(\"TC3.03 - Step 2: Valid data, number of records <= 500\", function () {",
-              "    pm.response.to.have.status(200);",
-              "    ",
-              "    var jsonData = pm.response.json();",
-              "    pm.expect(jsonData).to.be.an('array');",
-              "    ",
-              "    // Check that the number of returned elements does not exceed 500",
-              "    pm.expect(jsonData.length).to.be.at.most(500);",
-              "});"
-            ]
-          }
-        }
-      ]
+      "response": []
     },
     {
       "name": "TC3.04",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "text/plain",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "https://api.igdb.com/v4/companies",
-          "protocol": "https",
-          "host": [
-            "api",
-            "igdb",
-            "com"
-          ],
-          "path": [
-            "v4",
-            "companies"
-          ]
-        },
-        "body": {
-          "mode": "raw",
-          "raw": "fields id, name, country, start_date; limit 10;"
-        }
-      },
-      "response": [],
       "event": [
         {
           "listen": "test",
           "script": {
-            "type": "text/javascript",
             "exec": [
               "pm.test(\"TC3.04 - Step 1: Field 'country' is an integer\", function () {",
               "  pm.response.to.have.status(200);",
@@ -304,13 +313,13 @@
               "    }",
               "  });",
               "});"
-            ]
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
-      ]
-    },
-    {
-      "name": "TC3.05",
+      ],
       "request": {
         "method": "POST",
         "header": [
@@ -318,10 +327,24 @@
             "key": "Content-Type",
             "value": "text/plain",
             "type": "text"
+          },
+          {
+            "key": "Client-ID",
+            "value": "o4eh58n1j6qjzuprv1qtb0uxw9mgml",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer 6ksgcg02t6icrelbellt3vmgm8mx7d",
+            "type": "text"
           }
         ],
+        "body": {
+          "mode": "raw",
+          "raw": "fields id, name, country, start_date; limit 10;"
+        },
         "url": {
-          "raw": "https://api.igdb.com/v4/age_ratings",
+          "raw": "https://api.igdb.com/v4/companies",
           "protocol": "https",
           "host": [
             "api",
@@ -330,20 +353,18 @@
           ],
           "path": [
             "v4",
-            "age_ratings"
+            "companies"
           ]
-        },
-        "body": {
-          "mode": "raw",
-          "raw": ""
         }
       },
-      "response": [],
+      "response": []
+    },
+    {
+      "name": "TC3.05",
       "event": [
         {
           "listen": "test",
           "script": {
-            "type": "text/javascript",
             "exec": [
               "// TC3.05 — Step 1 runs against the empty-body response above.",
               "// Step 2 is fired automatically via pm.sendRequest() inside this script.",
@@ -378,13 +399,13 @@
               "        pm.expect(res).to.have.property('code', 400);",
               "    });",
               "});"
-            ]
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
-      ]
-    },
-    {
-      "name": "TC3.06",
+      ],
       "request": {
         "method": "POST",
         "header": [
@@ -392,10 +413,24 @@
             "key": "Content-Type",
             "value": "text/plain",
             "type": "text"
+          },
+          {
+            "key": "Client-ID",
+            "value": "o4eh58n1j6qjzuprv1qtb0uxw9mgml",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer 6ksgcg02t6icrelbellt3vmgm8mx7d",
+            "type": "text"
           }
         ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
         "url": {
-          "raw": "https://api.igdb.com/v4/games/count",
+          "raw": "https://api.igdb.com/v4/age_ratings",
           "protocol": "https",
           "host": [
             "api",
@@ -404,21 +439,18 @@
           ],
           "path": [
             "v4",
-            "games",
-            "count"
+            "age_ratings"
           ]
-        },
-        "body": {
-          "mode": "raw",
-          "raw": "where category = 9999;"
         }
       },
-      "response": [],
+      "response": []
+    },
+    {
+      "name": "TC3.06",
       "event": [
         {
           "listen": "test",
           "script": {
-            "type": "text/javascript",
             "exec": [
               "// TC3.06 — Both steps validate the same single response",
               "",
@@ -433,13 +465,13 @@
               "    var keys = Object.keys(j);",
               "    pm.expect(keys).to.deep.equal(['count']);",
               "});"
-            ]
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
-      ]
-    },
-    {
-      "name": "TC3.07",
+      ],
       "request": {
         "method": "POST",
         "header": [
@@ -447,10 +479,24 @@
             "key": "Content-Type",
             "value": "text/plain",
             "type": "text"
+          },
+          {
+            "key": "Client-ID",
+            "value": "o4eh58n1j6qjzuprv1qtb0uxw9mgml",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer 6ksgcg02t6icrelbellt3vmgm8mx7d",
+            "type": "text"
           }
         ],
+        "body": {
+          "mode": "raw",
+          "raw": "where category = 9999;"
+        },
         "url": {
-          "raw": "https://api.igdb.com/v4/game_engines",
+          "raw": "https://api.igdb.com/v4/games/count",
           "protocol": "https",
           "host": [
             "api",
@@ -459,20 +505,19 @@
           ],
           "path": [
             "v4",
-            "game_engines"
+            "games",
+            "count"
           ]
-        },
-        "body": {
-          "mode": "raw",
-          "raw": "fields id, name; limit 5; offset 10;\r\nfields id, name; limit 5; offset -1;"
         }
       },
-      "response": [],
+      "response": []
+    },
+    {
+      "name": "TC3.07",
       "event": [
         {
           "listen": "test",
           "script": {
-            "type": "text/javascript",
             "exec": [
               "// TC3.07 — Paste this script into BOTH requests",
               "// Step 1 fires on Request 1 (offset=10, expect 200)",
@@ -503,13 +548,13 @@
               "        });",
               "    }",
               "});"
-            ]
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
-      ]
-    },
-    {
-      "name": "TC3.08",
+      ],
       "request": {
         "method": "POST",
         "header": [
@@ -517,10 +562,24 @@
             "key": "Content-Type",
             "value": "text/plain",
             "type": "text"
+          },
+          {
+            "key": "Client-ID",
+            "value": "o4eh58n1j6qjzuprv1qtb0uxw9mgml",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer 6ksgcg02t6icrelbellt3vmgm8mx7d",
+            "type": "text"
           }
         ],
+        "body": {
+          "mode": "raw",
+          "raw": "fields id, name; limit 5; offset 10;\r\nfields id, name; limit 5; offset -1;"
+        },
         "url": {
-          "raw": "https://api.igdb.com/v4/release_dates?client_id=o4eh58n1j6qjzuprv1qtb0uxw9mgml",
+          "raw": "https://api.igdb.com/v4/game_engines",
           "protocol": "https",
           "host": [
             "api",
@@ -529,30 +588,18 @@
           ],
           "path": [
             "v4",
-            "release_dates"
-          ],
-          "query": [
-            {
-              "key": "client_id",
-              "value": "o4eh58n1j6qjzuprv1qtb0uxw9mgml"
-            },
-            {
-              "key": "client_id",
-              "value": "o4eh58n1j6qjzuprv1qtb0uxw9mgml"
-            }
+            "game_engines"
           ]
-        },
-        "body": {
-          "mode": "raw",
-          "raw": "where game.platforms = 48 & date > 9999999999; fields date, human;\r\nfields id, date, human; limit 1;"
         }
       },
-      "response": [],
+      "response": []
+    },
+    {
+      "name": "TC3.08",
       "event": [
         {
           "listen": "test",
           "script": {
-            "type": "text/javascript",
             "exec": [
               "// Check Step 1: No 500 error allowed, accept HTTP 400 or 200",
               "pm.test(\"TC3.08 - Step 1: Extreme timestamp does not cause 500 error (returns 400 or 200)\", function () {",
@@ -571,13 +618,13 @@
               "    // Ensure no Internal Server Error (500)",
               "    pm.expect(pm.response.code).to.not.equal(500);",
               "});"
-            ]
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
-      ]
-    },
-    {
-      "name": "TC3.09",
+      ],
       "request": {
         "method": "POST",
         "header": [
@@ -585,10 +632,101 @@
             "key": "Content-Type",
             "value": "text/plain",
             "type": "text"
+          },
+          {
+            "key": "Client-ID",
+            "value": "o4eh58n1j6qjzuprv1qtb0uxw9mgml",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer 6ksgcg02t6icrelbellt3vmgm8mx7d",
+            "type": "text"
           }
         ],
+        "body": {
+          "mode": "raw",
+          "raw": "where game.platforms = 48 & date > 9999999999; fields date, human;\r\nfields id, date, human; limit 1;"
+        },
         "url": {
-          "raw": "https://api.igdb.com/v4/game_versions?Client-ID =o4eh58n1j6qjzuprv1qtb0uxw9mgml&Authorization=Bearer ycgye0ziqyu0901dx0swt1q0iqkcdy",
+          "raw": "https://api.igdb.com/v4/release_dates?client_id=o4eh58n1j6qjzuprv1qtb0uxw9mgml",
+          "protocol": "https",
+          "host": [
+            "api",
+            "igdb",
+            "com"
+          ],
+          "path": [
+            "v4",
+            "release_dates"
+          ],
+          "query": [
+            {
+              "key": "client_id",
+              "value": "o4eh58n1j6qjzuprv1qtb0uxw9mgml"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC3.09",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// TC3.09 — Fixed: IGDB does not enforce FK constraint for game ID=0",
+              "// API returns actual records instead of empty array — assertions updated accordingly",
+              "",
+              "// Step 1: HTTP 200 and response is a valid array (no crash, no 500)",
+              "pm.test(\"TC3.09 - Step 1: game ID=0 returns HTTP 200 and a valid array (no HTTP 500)\", function () {",
+              "    pm.response.to.have.status(200);",
+              "    var j = pm.response.json();",
+              "    pm.expect(j).to.be.an('array');",
+              "});",
+              "",
+              "// Step 2: No internal error info exposed in the response body",
+              "pm.test(\"TC3.09 - Step 2: Response body contains no stack trace or internal error info\", function () {",
+              "    var body = pm.response.text();",
+              "    pm.expect(body).to.not.include('stack');",
+              "    pm.expect(body).to.not.include('NullPointerException');",
+              "    pm.expect(body).to.not.include('SQLException');",
+              "    pm.expect(body).to.not.include('Internal Server Error');",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/plain",
+            "type": "text"
+          },
+          {
+            "key": "Client-ID",
+            "value": "o4eh58n1j6qjzuprv1qtb0uxw9mgml",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer 6ksgcg02t6icrelbellt3vmgm8mx7d",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "where game = 0; fields game.name;"
+        },
+        "url": {
+          "raw": "https://api.igdb.com/v4/game_versions?Client-ID =o4eh58n1j6qjzuprv1qtb0uxw9mgml&Authorization=Bearer ycgye0ziqyu0901dx0swt1q0iqkcdy&Client-ID =o4eh58n1j6qjzuprv1qtb0uxw9mgml",
           "protocol": "https",
           "host": [
             "api",
@@ -611,83 +749,18 @@
             {
               "key": "Client-ID ",
               "value": "o4eh58n1j6qjzuprv1qtb0uxw9mgml"
-            },
-            {
-              "key": "Authorization",
-              "value": "Bearer ycgye0ziqyu0901dx0swt1q0iqkcdy"
             }
           ]
-        },
-        "body": {
-          "mode": "raw",
-          "raw": "where game = 0; fields game.name;"
         }
       },
-      "response": [],
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "type": "text/javascript",
-            "exec": [
-              "// TC3.09 — Fixed: IGDB does not enforce FK constraint for game ID=0",
-              "// API returns actual records instead of empty array — assertions updated accordingly",
-              "",
-              "// Step 1: HTTP 200 and response is a valid array (no crash, no 500)",
-              "pm.test(\"TC3.09 - Step 1: game ID=0 returns HTTP 200 and a valid array (no HTTP 500)\", function () {",
-              "    pm.response.to.have.status(200);",
-              "    var j = pm.response.json();",
-              "    pm.expect(j).to.be.an('array');",
-              "});",
-              "",
-              "// Step 2: No internal error info exposed in the response body",
-              "pm.test(\"TC3.09 - Step 2: Response body contains no stack trace or internal error info\", function () {",
-              "    var body = pm.response.text();",
-              "    pm.expect(body).to.not.include('stack');",
-              "    pm.expect(body).to.not.include('NullPointerException');",
-              "    pm.expect(body).to.not.include('SQLException');",
-              "    pm.expect(body).to.not.include('Internal Server Error');",
-              "});"
-            ]
-          }
-        }
-      ]
+      "response": []
     },
     {
       "name": "TC3.10",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "text/plain",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "https://api.igdb.com/v4/themes",
-          "protocol": "https",
-          "host": [
-            "api",
-            "igdb",
-            "com"
-          ],
-          "path": [
-            "v4",
-            "themes"
-          ]
-        },
-        "body": {
-          "mode": "raw",
-          "raw": "fields id, name, slug; limit 10;"
-        }
-      },
-      "response": [],
       "event": [
         {
           "listen": "test",
           "script": {
-            "type": "text/javascript",
             "exec": [
               "// TC3.10 — All 4 steps validate the same single response",
               "",
@@ -726,13 +799,13 @@
               "        if (item.name !== undefined) pm.expect(typeof item.name).to.equal('string');",
               "    });",
               "});"
-            ]
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
-      ]
-    },
-    {
-      "name": "TC3.11",
+      ],
       "request": {
         "method": "POST",
         "header": [
@@ -740,10 +813,24 @@
             "key": "Content-Type",
             "value": "text/plain",
             "type": "text"
+          },
+          {
+            "key": "Client-ID",
+            "value": "o4eh58n1j6qjzuprv1qtb0uxw9mgml",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer 6ksgcg02t6icrelbellt3vmgm8mx7d",
+            "type": "text"
           }
         ],
+        "body": {
+          "mode": "raw",
+          "raw": "fields id, name, slug; limit 10;"
+        },
         "url": {
-          "raw": "https://api.igdb.com/v4/multiquery",
+          "raw": "https://api.igdb.com/v4/themes",
           "protocol": "https",
           "host": [
             "api",
@@ -752,20 +839,18 @@
           ],
           "path": [
             "v4",
-            "multiquery"
+            "themes"
           ]
-        },
-        "body": {
-          "mode": "raw",
-          "raw": "query games \"Playstation Games\" {\r\n  fields id, name, rating;\r\n  where platforms = 48;\r\n  limit 5;\r\n};\r\nquery platforms/count \"Count of Platforms\" {\r\n  fields *;\r\n};"
         }
       },
-      "response": [],
+      "response": []
+    },
+    {
+      "name": "TC3.11",
       "event": [
         {
           "listen": "test",
           "script": {
-            "type": "text/javascript",
             "exec": [
               "// TC3.11 — All 3 steps in one request",
               "",
@@ -810,13 +895,13 @@
               "    pm.expect(Number.isInteger(countBlock.count)).to.be.true;",
               "    pm.expect(countBlock.count).to.be.above(0);",
               "});"
-            ]
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
-      ]
-    },
-    {
-      "name": "TC3.12",
+      ],
       "request": {
         "method": "POST",
         "header": [
@@ -824,10 +909,24 @@
             "key": "Content-Type",
             "value": "text/plain",
             "type": "text"
+          },
+          {
+            "key": "Client-ID",
+            "value": "o4eh58n1j6qjzuprv1qtb0uxw9mgml",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer 6ksgcg02t6icrelbellt3vmgm8mx7d",
+            "type": "text"
           }
         ],
+        "body": {
+          "mode": "raw",
+          "raw": "query games \"Playstation Games\" {\r\n  fields id, name, rating;\r\n  where platforms = 48;\r\n  limit 5;\r\n};\r\nquery platforms/count \"Count of Platforms\" {\r\n  fields *;\r\n};"
+        },
         "url": {
-          "raw": "https://api.igdb.com/v4/involved_companies",
+          "raw": "https://api.igdb.com/v4/multiquery",
           "protocol": "https",
           "host": [
             "api",
@@ -836,20 +935,18 @@
           ],
           "path": [
             "v4",
-            "involved_companies"
+            "multiquery"
           ]
-        },
-        "body": {
-          "mode": "raw",
-          "raw": "fields id, company, developer, publisher; limit 5;\r\n"
         }
       },
-      "response": [],
+      "response": []
+    },
+    {
+      "name": "TC3.12",
       "event": [
         {
           "listen": "test",
           "script": {
-            "type": "text/javascript",
             "exec": [
               "// TC3.13 — Paste this script into BOTH requests",
               "// Step 1 fires on Request 1 (no expand — company is integer)",
@@ -894,10 +991,51 @@
               "        }",
               "    });",
               "});"
-            ]
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
-      ]
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/plain",
+            "type": "text"
+          },
+          {
+            "key": "Client-ID",
+            "value": "o4eh58n1j6qjzuprv1qtb0uxw9mgml",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer 6ksgcg02t6icrelbellt3vmgm8mx7d",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "fields id, company, developer, publisher; limit 5;\r\n"
+        },
+        "url": {
+          "raw": "https://api.igdb.com/v4/involved_companies",
+          "protocol": "https",
+          "host": [
+            "api",
+            "igdb",
+            "com"
+          ],
+          "path": [
+            "v4",
+            "involved_companies"
+          ]
+        }
+      },
+      "response": []
     },
     {
       "name": "accesstoken",
@@ -917,18 +1055,6 @@
             "token"
           ],
           "query": [
-            {
-              "key": "client_id",
-              "value": "o4eh58n1j6qjzuprv1qtb0uxw9mgml"
-            },
-            {
-              "key": "client_secret",
-              "value": "bbawm7n7euju8uqghpt29m9mga8umo"
-            },
-            {
-              "key": "grant_type",
-              "value": "client_credentials"
-            },
             {
               "key": "client_id",
               "value": "o4eh58n1j6qjzuprv1qtb0uxw9mgml"
