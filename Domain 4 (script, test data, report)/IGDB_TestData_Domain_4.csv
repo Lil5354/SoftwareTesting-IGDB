@@ -1,0 +1,16 @@
+test_case,query,expected_status
+TC04_01.1_ExceedMaxLimit,fields name; limit 501;,403
+TC04_01.2_BoundaryMaxLimit,fields name; limit 500;,200
+TC04_01.3_NegativeOffset,fields name; limit 10; offset -1;,400
+TC04_01.4_BoundaryWithBigOffset,fields name; limit 10; offset 10000000;,400
+TC04_02.1_InvalidField,fields name; truong_ao;,400
+TC04_02.2_InvalidDataType,"fields name; where id = ""abc"";",400
+TC04_02.3_InvalidOperator,fields name; where rating => 80;,400
+TC04_03_MissingSemicolon,fields name,400
+TC04_04_LogicOperator,"fields name, rating; where (rating > 80 & rating < 90) | id = 1000;",200
+TC04_05_SearchEmptyString,"fields name; search """";",200
+TC04_06_GetAllFieldsAndExcludeField,fields *; exclude created_at; limit 5;,200
+TC04_07_ArrayContainsOperator,"fields name, genres; where genres = [4, 5];",200
+TC04_08_ValidMultiQuery,"query games ""Action"" { fields name; limit 2; }; query games ""RPG"" { fields name; limit 2; };",200
+TC04_09_SortDirectionSyntax,"fields name, rating; sort rating desc; limit 5;",200
+TC04_10_JSONBodyInsteadOfText,"{""fields"": ""name"", ""limit"": 10}",400
