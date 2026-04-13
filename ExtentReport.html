@@ -1,0 +1,3712 @@
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ <title>IGDB API - Automated Test Report</title>
+ <link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@c439bdbc7bade3d85af3b90e9e69c30ebc87445f/commons/img/logo.png">
+ <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@c439bdbc7bade3d85af3b90e9e69c30ebc87445f/commons/img/logo.png">
+ <link href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@78fa5a2421587b8228150e93142e5ba97178e85b/spark/css/spark-style.css" rel="stylesheet" />
+ <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+ <script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@78fa5a2421587b8228150e93142e5ba97178e85b/spark/js/jsontree.js"></script>
+ <style></style>
+</head>
+<body class="spa  dark">
+ <div class="app">
+  <div class="layout">
+   <div class="header navbar">
+ <div class="vheader">
+  <div class="nav-logo">
+   <a href="#">
+	 <div class="logo" style="background-image: url('https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@c43b89d03a7c43dae8bb8f0f078bad1997af6b3b/commons/img/logo.png')"></div>
+   </a>
+  </div>
+  <ul class="nav-left">
+   <li class="search-box">
+	<a class="search-toggle" href="#"><i class="search-icon fa fa-search"></i><i class="search-icon-close fa fa-close"></i></a>
+   </li>
+   <li class="search-input">
+    <input id="search-tests" class="form-control" type="text" placeholder="Search...">
+   </li>
+  </ul>
+  <ul class="nav-right">
+   <li class="m-r-10"><a href="#"><span class="badge badge-primary">IGDB API Test Suite - VoDangKhoa</span></a></li>
+   <li class="m-r-10">
+    <a href="#"><span class="badge badge-primary">13/04/2026 8:25:52 pm</span></a>
+   </li>
+  </ul>
+ </div>
+</div>
+   <div class="side-nav">
+ <div class="side-nav-inner">
+  <ul class="side-nav-menu">
+   <li class="nav-item dropdown" onclick="toggleView('test-view')">
+    <a id="nav-test" class="dropdown-toggle" href="#">
+     <span class="ico"><i class="fa fa-list"></i></span>
+    </a>
+   </li>
+   <li class="nav-item dropdown" onclick="toggleView('dashboard-view')">
+    <a id="nav-dashboard" class="dropdown-toggle" href="#">
+     <span class="ico"><i class="fa fa-bar-chart"></i></span>
+    </a>
+   </li>
+  </ul>
+ </div>
+</div>
+
+   <div class="vcontainer">
+    <div class="main-content">
+     
+
+<div class="test-wrapper row view test-view">
+  <div class="test-list">
+    <div class="test-list-tools">
+      <ul class="tools pull-left">
+        <li><a href="#"><span class="font-size-14">Tests</span></a></li>
+      </ul>
+      <ul class="tools text-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-exclamation-circle"></i></a>
+          <ul id="status-toggle" class="dropdown-menu dropdown-md p-v-0">
+ <a class="dropdown-item" status="pass" href="#"><span>Pass</span><span class="status success"></span></a>  <a class="dropdown-item" status="fail" href="#"><span>Fail</span><span class="status danger"></span></a>             <div class="dropdown-divider"></div>
+            <a status="clear" class="dropdown-item" href="#"><span>Clear</span><span class="pull-right"><i class="fa fa-close"></i></span></a>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="test-list-wrapper scrollable">
+      <ul class="test-list-item">
+        <li class="test-item" status="fail" test-id="1"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step1_ColdRequest_ResponseTimeShouldBeLessThan800ms</p>
+            <p class="text-sm">
+              <span>8:25:52 pm</span> / <span>880.13 ms</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-fail">Step1_ColdRequest_ResponseTimeShouldBeLessThan800ms</h5>
+                  <span class='badge badge-success'>13/04/2026 8:25:52 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:25:53 pm</span>
+                  <span class='badge badge-default'>880.13 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=1</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:25:52</td>
+        <td>
+Step 1: [Cold request] Send the first request and record the response time.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:25:53</td>
+        <td>
+HTTP Status: 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:25:53</td>
+        <td>
+Response Time: 847ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:25:53</td>
+        <td>
+Records returned: 10        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>Apr 13, 2026 20:25:53</td>
+        <td>
+Test FAILED ❌:   Cold request response time 847ms should be ≤ 800ms
+Assert.That(response.ResponseTimeMs, Is.LessThanOrEqualTo(800))
+  Expected: less than or equal to 800
+  But was:  847
+        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="fail" test-id="2"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step2_WarmRequests_AllShouldReturn200AndBeLessThan500ms</p>
+            <p class="text-sm">
+              <span>8:25:53 pm</span> / <span>2768.52 ms</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-fail">Step2_WarmRequests_AllShouldReturn200AndBeLessThan500ms</h5>
+                  <span class='badge badge-success'>13/04/2026 8:25:53 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:25:56 pm</span>
+                  <span class='badge badge-default'>2768.52 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=2</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:25:53</td>
+        <td>
+Step 2: [Warm requests] Send the request 4 more times and record each response time.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:25:54</td>
+        <td>
+Warm request #1: 994ms — HTTP 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:25:54</td>
+        <td>
+Warm request #2: 611ms — HTTP 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:25:55</td>
+        <td>
+Warm request #3: 581ms — HTTP 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:25:56</td>
+        <td>
+Warm request #4: 576ms — HTTP 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>Apr 13, 2026 20:25:56</td>
+        <td>
+Test FAILED ❌:   Warm request response time 994ms should be ≤ 500ms
+Assert.That(time, Is.LessThanOrEqualTo(500))
+  Expected: less than or equal to 500
+  But was:  994
+        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="fail" test-id="3"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step3_AverageResponseTime_ShouldBeLessThan500ms</p>
+            <p class="text-sm">
+              <span>8:25:56 pm</span> / <span>2595.32 ms</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-fail">Step3_AverageResponseTime_ShouldBeLessThan500ms</h5>
+                  <span class='badge badge-success'>13/04/2026 8:25:56 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:25:58 pm</span>
+                  <span class='badge badge-default'>2595.32 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=3</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:25:56</td>
+        <td>
+Step 3: [Summary] Calculate average response time across 5 runs.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:25:56</td>
+        <td>
+Run #1: 631ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:25:56</td>
+        <td>
+Run #2: 217ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:25:57</td>
+        <td>
+Run #3: 577ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:25:58</td>
+        <td>
+Run #4: 580ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:25:58</td>
+        <td>
+Run #5: 580ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:25:58</td>
+        <td>
+Average response time: 517.0ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>Apr 13, 2026 20:25:58</td>
+        <td>
+Test FAILED ❌:   Average response time 517.0ms should be ≤ 500ms
+Assert.That(average, Is.LessThanOrEqualTo(500))
+  Expected: less than or equal to 500
+  But was:  517.0d
+        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="4"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step1_ComplexQuery_ResponseTimeShouldBeLessThan2000ms</p>
+            <p class="text-sm">
+              <span>8:25:58 pm</span> / <span>1031.59 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step1_ComplexQuery_ResponseTimeShouldBeLessThan2000ms</h5>
+                  <span class='badge badge-success'>13/04/2026 8:25:58 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:25:59 pm</span>
+                  <span class='badge badge-default'>1031.59 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=4</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:25:58</td>
+        <td>
+Step 1: [Complex query] Send a request with 9 fields including nested fields, limit 100.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:25:59</td>
+        <td>
+HTTP Status: 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:25:59</td>
+        <td>
+Response Time: 1025ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:25:59</td>
+        <td>
+Records returned: 100        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:25:59</td>
+        <td>
+Response Size: 83.97 KB        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:25:59</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="5"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step2_WarmRequests_ShouldBeLessThan2000ms</p>
+            <p class="text-sm">
+              <span>8:25:59 pm</span> / <span>1629.47 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step2_WarmRequests_ShouldBeLessThan2000ms</h5>
+                  <span class='badge badge-success'>13/04/2026 8:25:59 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:01 pm</span>
+                  <span class='badge badge-default'>1629.47 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=5</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:25:59</td>
+        <td>
+Step 2: [Warm requests] Send 2 additional requests and record response times.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:00</td>
+        <td>
+Warm run #1: 672ms — HTTP 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:01</td>
+        <td>
+Warm run #2: 956ms — HTTP 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:01</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="6"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step3_BaselineComparison_IncreaseRatioShouldBeLessThan5x</p>
+            <p class="text-sm">
+              <span>8:26:01 pm</span> / <span>1616.02 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step3_BaselineComparison_IncreaseRatioShouldBeLessThan5x</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:01 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:02 pm</span>
+                  <span class='badge badge-default'>1616.02 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=6</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:01</td>
+        <td>
+Step 3: [Baseline comparison] Compare complex vs simple query response time.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:02</td>
+        <td>
+Simple query: 651ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:02</td>
+        <td>
+Complex query: 963ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:02</td>
+        <td>
+Increase ratio: 1.48x        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:02</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="7"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step1_AllRequestsShouldReturn200_NoRateLimiting</p>
+            <p class="text-sm">
+              <span>8:26:02 pm</span> / <span>5870.05 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step1_AllRequestsShouldReturn200_NoRateLimiting</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:02 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:08 pm</span>
+                  <span class='badge badge-default'>5870.05 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=7</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:03</td>
+        <td>
+Step 1: [Run Collection Runner] Send 10 consecutive requests, Delay=0ms.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:03</td>
+        <td>
+Request #1: HTTP 200 — 632ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:04</td>
+        <td>
+Request #2: HTTP 200 — 585ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:04</td>
+        <td>
+Request #3: HTTP 200 — 570ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:05</td>
+        <td>
+Request #4: HTTP 200 — 587ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:05</td>
+        <td>
+Request #5: HTTP 200 — 588ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:06</td>
+        <td>
+Request #6: HTTP 200 — 581ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:07</td>
+        <td>
+Request #7: HTTP 200 — 578ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:07</td>
+        <td>
+Request #8: HTTP 200 — 584ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:08</td>
+        <td>
+Request #9: HTTP 200 — 582ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:08</td>
+        <td>
+Request #10: HTTP 200 — 576ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:08</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="8"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step2_ResponseTimeAnalysis_MaxShouldBeLessThan1500ms</p>
+            <p class="text-sm">
+              <span>8:26:08 pm</span> / <span>5230.96 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step2_ResponseTimeAnalysis_MaxShouldBeLessThan1500ms</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:08 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:14 pm</span>
+                  <span class='badge badge-default'>5230.96 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=8</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:08</td>
+        <td>
+Step 2: [Response time analysis] Record min, max, and average of 10 requests.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:14</td>
+        <td>
+Min: 238ms, Max: 778ms, Average: 522.0ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:14</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="9"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step3_SpikeCheck_ResponseBodyShouldBeComplete</p>
+            <p class="text-sm">
+              <span>8:26:14 pm</span> / <span>5601.52 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step3_SpikeCheck_ResponseBodyShouldBeComplete</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:14 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:19 pm</span>
+                  <span class='badge badge-default'>5601.52 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=9</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:14</td>
+        <td>
+Step 3: [Spike check] Verify spiked request still has complete response body.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:19</td>
+        <td>
+Highest spike: Request #1 at 633ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:19</td>
+        <td>
+Spike response records: 20        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:19</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="10"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step4_DegradationCheck_NoConsistentIncrease</p>
+            <p class="text-sm">
+              <span>8:26:19 pm</span> / <span>5460.14 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step4_DegradationCheck_NoConsistentIncrease</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:19 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:25 pm</span>
+                  <span class='badge badge-default'>5460.14 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=10</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:19</td>
+        <td>
+Step 4: [Degradation check] Compare first 3 vs last 3 response times.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:25</td>
+        <td>
+First 3 average: 506.3ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:25</td>
+        <td>
+Last 3 average: 518.3ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:25</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="11"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step1_BroadKeyword_ResponseTimeShouldBeLessThan1500ms</p>
+            <p class="text-sm">
+              <span>8:26:25 pm</span> / <span>661.87 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step1_BroadKeyword_ResponseTimeShouldBeLessThan1500ms</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:25 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:25 pm</span>
+                  <span class='badge badge-default'>661.87 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=11</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:25</td>
+        <td>
+Step 1: [Broad keyword] Send /search request with search "a", limit 50.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:25</td>
+        <td>
+HTTP Status: 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:25</td>
+        <td>
+Response Time: 660ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:25</td>
+        <td>
+Records returned: 0        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:25</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="12"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step2_SpecificKeyword_ShouldBeFasterOrEqualToBroad</p>
+            <p class="text-sm">
+              <span>8:26:25 pm</span> / <span>1252.64 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step2_SpecificKeyword_ShouldBeFasterOrEqualToBroad</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:25 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:27 pm</span>
+                  <span class='badge badge-default'>1252.64 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=12</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:25</td>
+        <td>
+Step 2: [Specific keyword] Send /search with search "Mario Kart", limit 50.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:27</td>
+        <td>
+Broad keyword ("a"): 660ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:27</td>
+        <td>
+Specific keyword ("Mario Kart"): 590ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:27</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="13"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step3_SearchVsGames_OverheadShouldBeLessThan3x</p>
+            <p class="text-sm">
+              <span>8:26:27 pm</span> / <span>1217.43 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step3_SearchVsGames_OverheadShouldBeLessThan3x</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:27 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:28 pm</span>
+                  <span class='badge badge-default'>1217.43 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=13</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:27</td>
+        <td>
+Step 3: [/games comparison] Compare /search response time with /games.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:28</td>
+        <td>
+/games: 636ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:28</td>
+        <td>
+/search: 580ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:28</td>
+        <td>
+Ratio: 0.91x        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:28</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="14"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step1_FieldsStarLimit50_ResponseTimeShouldBeLessThan3000ms</p>
+            <p class="text-sm">
+              <span>8:26:28 pm</span> / <span>1037.79 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step1_FieldsStarLimit50_ResponseTimeShouldBeLessThan3000ms</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:28 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:29 pm</span>
+                  <span class='badge badge-default'>1037.79 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=14</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:28</td>
+        <td>
+Step 1: [fields * limit 50] Send request with fields *; limit 50.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:29</td>
+        <td>
+HTTP Status: 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:29</td>
+        <td>
+Response Time: 1023ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:29</td>
+        <td>
+Records: 50        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:29</td>
+        <td>
+Response Size: 77.64 KB        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:29</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="15"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step2_BaselineRatio_ShouldBeLessThan15x</p>
+            <p class="text-sm">
+              <span>8:26:29 pm</span> / <span>1255.83 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step2_BaselineRatio_ShouldBeLessThan15x</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:29 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:30 pm</span>
+                  <span class='badge badge-default'>1255.83 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=15</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:29</td>
+        <td>
+Step 2: [Baseline ratio] Compare fields * vs simple query.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:30</td>
+        <td>
+Simple query: 304ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:30</td>
+        <td>
+Fields * limit 50: 950ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:30</td>
+        <td>
+Ratio: 3.12x        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:30</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="16"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step3_FieldsStarLimit500_ResponseTimeShouldBeLessThan10000ms</p>
+            <p class="text-sm">
+              <span>8:26:30 pm</span> / <span>2447.05 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step3_FieldsStarLimit500_ResponseTimeShouldBeLessThan10000ms</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:30 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:33 pm</span>
+                  <span class='badge badge-default'>2447.05 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=16</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:30</td>
+        <td>
+Step 3: [fields * limit 500] Send request with fields *; limit 500 (max).        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:33</td>
+        <td>
+HTTP Status: 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:33</td>
+        <td>
+Response Time: 2445ms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:33</td>
+        <td>
+Response Size: 836.28 KB        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:33</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="17"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step4_StabilityCheck_NoTimeouts</p>
+            <p class="text-sm">
+              <span>8:26:33 pm</span> / <span>3643.84 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step4_StabilityCheck_NoTimeouts</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:33 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:36 pm</span>
+                  <span class='badge badge-default'>3643.84 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=17</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:33</td>
+        <td>
+Step 4: [Stability check] With fields * limit 500, send 2 more requests.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:35</td>
+        <td>
+Run #1: 1931ms — HTTP 200 — Records: 500        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:36</td>
+        <td>
+Run #2: 1626ms — HTTP 200 — Records: 500        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:36</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="18"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step1_SearchCharacter_ShouldReturnMarioRelatedResults</p>
+            <p class="text-sm">
+              <span>8:26:36 pm</span> / <span>283.14 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step1_SearchCharacter_ShouldReturnMarioRelatedResults</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:36 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:36 pm</span>
+                  <span class='badge badge-default'>283.14 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=18</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:36</td>
+        <td>
+Step 1: [Search character] Query /characters with search "Mario".        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:36</td>
+        <td>
+HTTP Status: 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:36</td>
+        <td>
+Records returned: 3        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:36</td>
+        <td>
+  Character: Mario (ID: 3726)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:36</td>
+        <td>
+  Character: Mario Alcalde (ID: 1564)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:36</td>
+        <td>
+  Character: Mario Auditore (ID: 1112)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:36</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="19"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step2_FieldValidation_IdAndNameShouldBeValid</p>
+            <p class="text-sm">
+              <span>8:26:36 pm</span> / <span>657.74 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step2_FieldValidation_IdAndNameShouldBeValid</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:36 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:37 pm</span>
+                  <span class='badge badge-default'>657.74 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=19</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:36</td>
+        <td>
+Step 2: [Field validation] Confirm data types: id is number, name is string.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:37</td>
+        <td>
+  Mario: 2 games linked        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:37</td>
+        <td>
+  Mario Alcalde: 1 games linked        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:37</td>
+        <td>
+  Mario Auditore: 2 games linked        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:37</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="20"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step1_NestedMugShot_UrlShouldBeValidIfPresent</p>
+            <p class="text-sm">
+              <span>8:26:37 pm</span> / <span>646.72 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step1_NestedMugShot_UrlShouldBeValidIfPresent</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:37 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:38 pm</span>
+                  <span class='badge badge-default'>646.72 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=20</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:37</td>
+        <td>
+Step 1: [Nested mug_shot] Query /characters with mug_shot fields.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:38</td>
+        <td>
+HTTP Status: 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:38</td>
+        <td>
+Records: 5        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:38</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="21"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step2_SpeciesEnum_ShouldBeWithinRange1To5</p>
+            <p class="text-sm">
+              <span>8:26:38 pm</span> / <span>705.86 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step2_SpeciesEnum_ShouldBeWithinRange1To5</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:38 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:38 pm</span>
+                  <span class='badge badge-default'>705.86 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=21</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:38</td>
+        <td>
+Step 2: [Species enum] Verify species value is within range 1-5.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:38</td>
+        <td>
+HTTP Status: 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:38</td>
+        <td>
+Records with species: 0        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:38</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="22"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step3_AlternativeNames_AkasShouldBeArrayIfPresent</p>
+            <p class="text-sm">
+              <span>8:26:38 pm</span> / <span>710.36 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step3_AlternativeNames_AkasShouldBeArrayIfPresent</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:38 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:39 pm</span>
+                  <span class='badge badge-default'>710.36 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=22</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:38</td>
+        <td>
+Step 3: [Alternative names] Verify akas field is array of strings when present.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:39</td>
+        <td>
+HTTP Status: 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:39</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="fail" test-id="23"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step1_EmptySearchString_ShouldReturn400</p>
+            <p class="text-sm">
+              <span>8:26:39 pm</span> / <span>689.88 ms</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-fail">Step1_EmptySearchString_ShouldReturn400</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:39 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:40 pm</span>
+                  <span class='badge badge-default'>689.88 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=23</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:39</td>
+        <td>
+Step 1: [Empty string search] Send /characters with search "".        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:39</td>
+        <td>
+NOTE: This is a negative test — IGDB may not validate empty search properly.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:40</td>
+        <td>
+HTTP Status: 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:40</td>
+        <td>
+Response Body (first 200 chars): []        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>Apr 13, 2026 20:26:40</td>
+        <td>
+Test FAILED ❌:   Expected HTTP 400 for empty search string, but got 200. IGDB lacks input validation for empty search — this is a known API behavior.
+Assert.That(response.StatusCode, Is.EqualTo(400))
+  Expected: 400
+  But was:  200
+        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="fail" test-id="24"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step2_OutOfEnumSpecies_ShouldReturn400</p>
+            <p class="text-sm">
+              <span>8:26:40 pm</span> / <span>307.57 ms</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-fail">Step2_OutOfEnumSpecies_ShouldReturn400</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:40 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:40 pm</span>
+                  <span class='badge badge-default'>307.57 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=24</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:40</td>
+        <td>
+Step 2: [Out-of-enum species] Send /characters with where species = 99.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:40</td>
+        <td>
+NOTE: This is a negative test — IGDB may not validate enum range.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:40</td>
+        <td>
+HTTP Status: 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:40</td>
+        <td>
+Response Body (first 200 chars): []        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>Apr 13, 2026 20:26:40</td>
+        <td>
+Test FAILED ❌:   Expected HTTP 400 for species=99 (out of enum 1-5), but got 200. IGDB does not validate enum range — species=99 is accepted silently.
+Assert.That(response.StatusCode, Is.EqualTo(400))
+  Expected: 400
+  But was:  200
+        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="25"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step1_ResponseStructure_ShouldBeArrayOfValidGenres</p>
+            <p class="text-sm">
+              <span>8:26:40 pm</span> / <span>643.25 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step1_ResponseStructure_ShouldBeArrayOfValidGenres</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:40 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:41 pm</span>
+                  <span class='badge badge-default'>643.25 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=25</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:40</td>
+        <td>
+Step 1: [Response structure] Query /genres with fields id, name, slug; limit 20.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:41</td>
+        <td>
+HTTP Status: 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:41</td>
+        <td>
+Records: 20        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:41</td>
+        <td>
+  Genre: Point-and-click (ID: 2, slug: point-and-click)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:41</td>
+        <td>
+  Genre: Fighting (ID: 4, slug: fighting)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:41</td>
+        <td>
+  Genre: Shooter (ID: 5, slug: shooter)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:41</td>
+        <td>
+  Genre: Music (ID: 7, slug: music)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:41</td>
+        <td>
+  Genre: Platform (ID: 8, slug: platform)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:41</td>
+        <td>
+  Genre: Puzzle (ID: 9, slug: puzzle)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:41</td>
+        <td>
+  Genre: Racing (ID: 10, slug: racing)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:41</td>
+        <td>
+  Genre: Real Time Strategy (RTS) (ID: 11, slug: real-time-strategy-rts)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:41</td>
+        <td>
+  Genre: Role-playing (RPG) (ID: 12, slug: role-playing-rpg)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:41</td>
+        <td>
+  Genre: Simulator (ID: 13, slug: simulator)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:41</td>
+        <td>
+  Genre: Sport (ID: 14, slug: sport)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:41</td>
+        <td>
+  Genre: Strategy (ID: 15, slug: strategy)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:41</td>
+        <td>
+  Genre: Turn-based strategy (TBS) (ID: 16, slug: turn-based-strategy-tbs)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:41</td>
+        <td>
+  Genre: Tactical (ID: 24, slug: tactical)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:41</td>
+        <td>
+  Genre: Hack and slash/Beat 'em up (ID: 25, slug: hack-and-slash-beat-em-up)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:41</td>
+        <td>
+  Genre: Quiz/Trivia (ID: 26, slug: quiz-trivia)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:41</td>
+        <td>
+  Genre: Pinball (ID: 30, slug: pinball)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:41</td>
+        <td>
+  Genre: Adventure (ID: 31, slug: adventure)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:41</td>
+        <td>
+  Genre: Indie (ID: 32, slug: indie)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:41</td>
+        <td>
+  Genre: Arcade (ID: 33, slug: arcade)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:41</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="26"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step2_Consistency_SameResultsAcross3Calls</p>
+            <p class="text-sm">
+              <span>8:26:41 pm</span> / <span>1514.63 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step2_Consistency_SameResultsAcross3Calls</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:41 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:42 pm</span>
+                  <span class='badge badge-default'>1514.63 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=26</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:41</td>
+        <td>
+Step 2: [Consistency] Call the same request 3 times. Compare results.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:42</td>
+        <td>
+Call 1: 20 genres, IDs: [2,4,5,7,8,9,10,11,12,13,14,15,16,24,25,26,30,31,32,33]        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:42</td>
+        <td>
+Call 2: 20 genres, IDs: [2,4,5,7,8,9,10,11,12,13,14,15,16,24,25,26,30,31,32,33]        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:42</td>
+        <td>
+Call 3: 20 genres, IDs: [2,4,5,7,8,9,10,11,12,13,14,15,16,24,25,26,30,31,32,33]        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:42</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="27"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step1_FilterCategory1Console_AllShouldHaveCategory1</p>
+            <p class="text-sm">
+              <span>8:26:42 pm</span> / <span>641.11 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step1_FilterCategory1Console_AllShouldHaveCategory1</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:42 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:43 pm</span>
+                  <span class='badge badge-default'>641.11 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=27</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:42</td>
+        <td>
+Step 1: [Filter category] Query /platforms with where category = 1 (Console), limit 10.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:43</td>
+        <td>
+HTTP Status: 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:43</td>
+        <td>
+Records: 0        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:43</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="28"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step2_CrossCheckCategory5_ShouldBeDistinctFromCategory1</p>
+            <p class="text-sm">
+              <span>8:26:43 pm</span> / <span>883.01 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step2_CrossCheckCategory5_ShouldBeDistinctFromCategory1</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:43 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:44 pm</span>
+                  <span class='badge badge-default'>883.01 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=28</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:43</td>
+        <td>
+Step 2: [Cross-check] Compare category=1 (Console) vs category=5 (Portable).        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:44</td>
+        <td>
+Category 1 (Console): 0 platforms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:44</td>
+        <td>
+Category 5 (Portable): 0 platforms        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:44</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="29"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step1_ResponseStructure_FieldTypesShouldBeValid</p>
+            <p class="text-sm">
+              <span>8:26:44 pm</span> / <span>654.59 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step1_ResponseStructure_FieldTypesShouldBeValid</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:44 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:45 pm</span>
+                  <span class='badge badge-default'>654.59 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=29</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:44</td>
+        <td>
+Step 1: [Response structure] Query /companies with fields id, name, country, developed, published; limit 10.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:45</td>
+        <td>
+HTTP Status: 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:45</td>
+        <td>
+Records: 10        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:45</td>
+        <td>
+  Company: Noah Dundas (country: )        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:45</td>
+        <td>
+  Company: 10tacle Studios (country: 276)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:45</td>
+        <td>
+  Company: Sunborn Network Technology (country: 156)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:45</td>
+        <td>
+  Company: Codebusters Studio (country: )        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:45</td>
+        <td>
+  Company: Unfit Parent (country: )        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:45</td>
+        <td>
+  Company: CyrusTheVirus Studios (country: 840)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:45</td>
+        <td>
+  Company: FATHILLL GAMES (country: )        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:45</td>
+        <td>
+  Company: Zeta Zash (country: )        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:45</td>
+        <td>
+  Company: emokoshka (country: )        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:45</td>
+        <td>
+  Company: Mideas Game Studio (country: 724)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:45</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="30"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step2_FilterNintendo_ShouldReturnCorrectData</p>
+            <p class="text-sm">
+              <span>8:26:45 pm</span> / <span>649.4 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step2_FilterNintendo_ShouldReturnCorrectData</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:45 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:45 pm</span>
+                  <span class='badge badge-default'>649.4 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=30</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:45</td>
+        <td>
+Step 2: [Specific filter] Query /companies with where name = "Nintendo".        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:45</td>
+        <td>
+HTTP Status: 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:45</td>
+        <td>
+  Nintendo: country = 392, developed count = 683        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:45</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="31"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step3_CrossCheckGame_GameIdShouldExist</p>
+            <p class="text-sm">
+              <span>8:26:45 pm</span> / <span>862.93 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step3_CrossCheckGame_GameIdShouldExist</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:45 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:46 pm</span>
+                  <span class='badge badge-default'>862.93 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=31</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:45</td>
+        <td>
+Step 3: [Cross-check] Take a game ID from Nintendo's developed list, verify in /games.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:46</td>
+        <td>
+Testing game ID: 3465        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:46</td>
+        <td>
+Game response: HTTP 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:46</td>
+        <td>
+  Game: Custom Robo (ID: 3465)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:46</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="32"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step1_ResponseStructure_IdNameLocaleShouldBeValid</p>
+            <p class="text-sm">
+              <span>8:26:46 pm</span> / <span>311.4 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step1_ResponseStructure_IdNameLocaleShouldBeValid</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:46 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:46 pm</span>
+                  <span class='badge badge-default'>311.4 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=32</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:46</td>
+        <td>
+Step 1: [Response structure] Query /languages with fields id, name, native_name, locale; limit 20.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:46</td>
+        <td>
+HTTP Status: 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:46</td>
+        <td>
+Records: 20        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:46</td>
+        <td>
+  Language: Arabic (locale: ar)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:46</td>
+        <td>
+  Language: Chinese (Simplified) (locale: zh-CN)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:46</td>
+        <td>
+  Language: Chinese (Traditional) (locale: zh-TW)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:46</td>
+        <td>
+  Language: Czech (locale: cs-CZ)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:46</td>
+        <td>
+  Language: Danish (locale: da-DK)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:46</td>
+        <td>
+  Language: Dutch (locale: nl-NL)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:46</td>
+        <td>
+  Language: English (locale: en-US)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:46</td>
+        <td>
+  Language: English (UK) (locale: en-GB)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:46</td>
+        <td>
+  Language: Spanish (Spain) (locale: es-ES)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:46</td>
+        <td>
+  Language: Spanish (Mexico) (locale: es-MX)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:46</td>
+        <td>
+  Language: French (locale: fr-FR)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:46</td>
+        <td>
+  Language: Hungarian (locale: hu-HU)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:46</td>
+        <td>
+  Language: Finnish (locale: fi-FI)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:46</td>
+        <td>
+  Language: Italian (locale: it-IT)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:46</td>
+        <td>
+  Language: Hebrew (locale: he-IL)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:46</td>
+        <td>
+  Language: Japanese (locale: ja-JP)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:46</td>
+        <td>
+  Language: Korean (locale: ko-KR)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:46</td>
+        <td>
+  Language: Norwegian (locale: nb-NO)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:46</td>
+        <td>
+  Language: Portuguese (Portugal) (locale: pt-PT)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:46</td>
+        <td>
+  Language: Portuguese (Brazil) (locale: pt-BR)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:46</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="33"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step2_FilterLocaleEnGB_ShouldReturnEnglish</p>
+            <p class="text-sm">
+              <span>8:26:46 pm</span> / <span>640.34 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step2_FilterLocaleEnGB_ShouldReturnEnglish</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:46 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:47 pm</span>
+                  <span class='badge badge-default'>640.34 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=33</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:46</td>
+        <td>
+Step 2: [Filter locale] Query /languages with where locale = "en-GB".        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:47</td>
+        <td>
+HTTP Status: 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:47</td>
+        <td>
+  English: English (UK) (locale: en-GB)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:47</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="34"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step3_CrossCheckLanguageSupports_ShouldHaveLanguageField</p>
+            <p class="text-sm">
+              <span>8:26:47 pm</span> / <span>360.45 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step3_CrossCheckLanguageSupports_ShouldHaveLanguageField</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:47 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:47 pm</span>
+                  <span class='badge badge-default'>360.45 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=34</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:47</td>
+        <td>
+Step 3: [Cross-check] Retrieve language_supports, verify it has language field.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:47</td>
+        <td>
+HTTP Status: 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:47</td>
+        <td>
+  language_supports[0]: language = 7        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:47</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="35"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step1_StructureAndEnum_IdShouldBeWithinRange1To7</p>
+            <p class="text-sm">
+              <span>8:26:47 pm</span> / <span>641.71 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step1_StructureAndEnum_IdShouldBeWithinRange1To7</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:47 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:48 pm</span>
+                  <span class='badge badge-default'>641.71 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=35</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:47</td>
+        <td>
+Step 1: [Structure and enum] Query /player_perspectives with fields id, name, slug; limit 10.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:48</td>
+        <td>
+HTTP Status: 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:48</td>
+        <td>
+Records: 7        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:48</td>
+        <td>
+  Perspective: First person (ID: 1)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:48</td>
+        <td>
+  Perspective: Third person (ID: 2)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:48</td>
+        <td>
+  Perspective: Bird view / Isometric (ID: 3)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:48</td>
+        <td>
+  Perspective: Side view (ID: 4)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:48</td>
+        <td>
+  Perspective: Text (ID: 5)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:48</td>
+        <td>
+  Perspective: Auditory (ID: 6)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:48</td>
+        <td>
+  Perspective: Virtual Reality (ID: 7)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:48</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="36"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step2_CrossCheckGames_FirstPersonGamesShouldContainId1</p>
+            <p class="text-sm">
+              <span>8:26:48 pm</span> / <span>736.79 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step2_CrossCheckGames_FirstPersonGamesShouldContainId1</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:48 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:49 pm</span>
+                  <span class='badge badge-default'>736.79 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=36</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:48</td>
+        <td>
+Step 2: [Cross-check with /games] Find First Person games (perspective ID=1).        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:49</td>
+        <td>
+HTTP Status: 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:49</td>
+        <td>
+First Person games: 5        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:49</td>
+        <td>
+  Game: Rival Species — perspectives: [1]        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:49</td>
+        <td>
+  Game: Suna no Embrace: Eden no Sato no Never — perspectives: [1,3]        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:49</td>
+        <td>
+  Game: Filthy, Stinking, Orcs! — perspectives: [1,3,7]        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:49</td>
+        <td>
+  Game: Mikagami Sumika No Seifuku Katsudou — perspectives: [1]        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:49</td>
+        <td>
+  Game: Coastline to Atmosphere — perspectives: [1]        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:49</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="37"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step3_VRCheck_ShouldReturnArrayWithoutError</p>
+            <p class="text-sm">
+              <span>8:26:49 pm</span> / <span>383.31 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step3_VRCheck_ShouldReturnArrayWithoutError</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:49 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:49 pm</span>
+                  <span class='badge badge-default'>383.31 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=37</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:49</td>
+        <td>
+Step 3: [Full enum check] Query /games with player_perspectives = (7) (VR).        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:49</td>
+        <td>
+HTTP Status: 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:49</td>
+        <td>
+VR games: 3        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:49</td>
+        <td>
+  VR Game: Filthy, Stinking, Orcs!        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:49</td>
+        <td>
+  VR Game: Liz: Before the Plague        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:49</td>
+        <td>
+  VR Game: Resonite        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:49</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="38"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step1_ResponseStructure_FieldsShouldHaveCorrectTypes</p>
+            <p class="text-sm">
+              <span>8:26:49 pm</span> / <span>653.2 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step1_ResponseStructure_FieldsShouldHaveCorrectTypes</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:49 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:50 pm</span>
+                  <span class='badge badge-default'>653.2 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=38</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:49</td>
+        <td>
+Step 1: [Response structure] Query /popularity_primitives with fields game_id, popularity_type, value; limit 10.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:50</td>
+        <td>
+HTTP Status: 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:50</td>
+        <td>
+Records: 10        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:50</td>
+        <td>
+  game_id: 153161, type: 6, value: 2.4068923E-08        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:50</td>
+        <td>
+  game_id: 128946, type: 6, value: 3.586269555E-06        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:50</td>
+        <td>
+  game_id: 160064, type: 6, value: 1.76505437E-07        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:50</td>
+        <td>
+  game_id: 152783, type: 6, value: 3.61033848E-07        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:50</td>
+        <td>
+  game_id: 33618, type: 6, value: 2.4068923E-08        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:50</td>
+        <td>
+  game_id: 197485, type: 6, value: 4.0114872E-08        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:50</td>
+        <td>
+  game_id: 86467, type: 6, value: 2.4068923E-08        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:50</td>
+        <td>
+  game_id: 244682, type: 6, value: 3.61033848E-07        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:50</td>
+        <td>
+  game_id: 115831, type: 6, value: 4.09171694E-07        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:50</td>
+        <td>
+  game_id: 280500, type: 6, value: 1.6045949E-08        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:50</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="39"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step2_FilterAndSort_Type1ShouldBeDescending</p>
+            <p class="text-sm">
+              <span>8:26:50 pm</span> / <span>662.52 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step2_FilterAndSort_Type1ShouldBeDescending</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:50 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:50 pm</span>
+                  <span class='badge badge-default'>662.52 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=39</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:50</td>
+        <td>
+Step 2: [Filter popularity_type] Query with type=1, sort value desc, limit 5.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:50</td>
+        <td>
+HTTP Status: 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:50</td>
+        <td>
+Records: 5        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:50</td>
+        <td>
+  Values (desc): [0.02, 0.01, 0.01, 0.01, 0.01]        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:50</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="40"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step3_CrossCheckGameId_GameShouldExist</p>
+            <p class="text-sm">
+              <span>8:26:50 pm</span> / <span>770.07 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step3_CrossCheckGameId_GameShouldExist</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:50 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:51 pm</span>
+                  <span class='badge badge-default'>770.07 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=40</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:50</td>
+        <td>
+Step 3: [Cross-check game_id] Verify game_id exists in /games.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:51</td>
+        <td>
+Testing game_id: 87622        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:51</td>
+        <td>
+  Game: Free Fire (ID: 87622)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:51</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="41"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step4_DataFreshness_StructureShouldBeConsistent</p>
+            <p class="text-sm">
+              <span>8:26:51 pm</span> / <span>1260.4 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step4_DataFreshness_StructureShouldBeConsistent</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:51 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:52 pm</span>
+                  <span class='badge badge-default'>1260.4 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=41</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:51</td>
+        <td>
+Step 4: [Data freshness] Call the same request twice. Verify structure consistency.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:52</td>
+        <td>
+Call 1: 5 records        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:52</td>
+        <td>
+Call 2: 5 records        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:52</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="42"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step1_ResponseStructure_ShouldBeArrayOfValidCollections</p>
+            <p class="text-sm">
+              <span>8:26:52 pm</span> / <span>884.3 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step1_ResponseStructure_ShouldBeArrayOfValidCollections</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:52 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:53 pm</span>
+                  <span class='badge badge-default'>884.3 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=42</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:52</td>
+        <td>
+Step 1: [Response structure] Send POST /collections with fields id, name, slug, games; limit 10.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:53</td>
+        <td>
+HTTP Status: 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:53</td>
+        <td>
+Records: 10        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:53</td>
+        <td>
+  Collection: Super Sidekicks (ID: 4280, games: 4)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:53</td>
+        <td>
+  Collection: Rope'n'Fly (ID: 11118, games: 1)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:53</td>
+        <td>
+  Collection: Kisekae (ID: 12401, games: 4)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:53</td>
+        <td>
+  Collection: Ares Fighter (ID: 12801, games: 2)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:53</td>
+        <td>
+  Collection: Fallstreak (ID: 7630, games: 3)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:53</td>
+        <td>
+  Collection: SUGURI (ID: 2534, games: 7)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:53</td>
+        <td>
+  Collection: Squids (ID: 2216, games: 3)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:53</td>
+        <td>
+  Collection: Ridiculous Fishing (ID: 9447, games: 4)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:53</td>
+        <td>
+  Collection: Taisen Golf (ID: 9828, games: 2)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:53</td>
+        <td>
+  Collection: Crescent Satsujin Jiken (ID: 9088, games: 3)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:53</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="43"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step2_SearchMario_ShouldReturnRelatedCollections</p>
+            <p class="text-sm">
+              <span>8:26:53 pm</span> / <span>392.5 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step2_SearchMario_ShouldReturnRelatedCollections</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:53 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:54 pm</span>
+                  <span class='badge badge-default'>392.5 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=43</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:53</td>
+        <td>
+Step 2: [Search by name] Send POST /collections with search "Mario".        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:54</td>
+        <td>
+HTTP Status: 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:54</td>
+        <td>
+Records: 2        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:54</td>
+        <td>
+  Collection: Super Mario World: A Super Mario Adventure (games: 3)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:54</td>
+        <td>
+  Collection: My Mario (games: 2)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:54</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+        <li class="test-item" status="pass" test-id="44"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Step3_FilterType1_AllShouldHaveType1</p>
+            <p class="text-sm">
+              <span>8:26:54 pm</span> / <span>323.78 ms</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="detail-head">
+              <div class="p-v-10">
+                <div class="info">
+                  <h5 class="test-status text-pass">Step3_FilterType1_AllShouldHaveType1</h5>
+                  <span class='badge badge-success'>13/04/2026 8:26:54 pm</span>
+                  <span class='badge badge-danger'>13/04/2026 8:26:54 pm</span>
+                  <span class='badge badge-default'>323.78 ms</span>
+                  &middot; <span class='uri-anchor badge badge-default'>#test-id=44</span>
+                  <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+                  <span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+                  <span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+                </div>
+              </div>
+            </div>
+
+
+<div class="detail-body mt-4">
+
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:54</td>
+        <td>
+Step 3: [Filter by type] Send /collections with where type = 1; limit 5.        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:54</td>
+        <td>
+HTTP Status: 200        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:54</td>
+        <td>
+Records: 5        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:54</td>
+        <td>
+  Collection: Super Sidekicks (type: 1)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:54</td>
+        <td>
+  Collection: Rope'n'Fly (type: 1)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:54</td>
+        <td>
+  Collection: Kisekae (type: 1)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:54</td>
+        <td>
+  Collection: Ares Fighter (type: 1)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>Apr 13, 2026 20:26:54</td>
+        <td>
+  Collection: Fallstreak (type: 1)        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>Apr 13, 2026 20:26:54</td>
+        <td>
+Test PASSED ✅        </td>
+      </tr>
+  </tbody>
+</table></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="test-content scrollable">
+    <div class="test-content-tools">
+      <ul><li><a class="back-to-test" href="#"><i class="fa fa-arrow-left"></i></a></li></ul>
+    </div>
+    <div class="test-content-detail"><div class="detail-body"></div></div>
+  </div>
+</div>
+
+     
+
+<div class="container-fluid p-4 view dashboard-view">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="card"><div class="card-body">
+          <p class="m-b-0">Started</p>
+          <h3>13/04/2026 8:25:52 pm</h3>
+      </div></div>
+    </div>
+    <div class="col-md-3">
+      <div class="card"><div class="card-body">
+          <p class="m-b-0">Ended</p>
+          <h3>13/04/2026 8:26:54 pm</h3>
+      </div></div>
+    </div>
+    <div class="col-md-3">
+      <div class="card"><div class="card-body">
+          <p class="m-b-0 text-pass">Tests Passed</p>
+          <h3>39</h3>
+      </div></div>
+    </div>
+    <div class="col-md-3">
+      <div class="card"><div class="card-body">
+          <p class="m-b-0 text-fail">Tests Failed</p>
+          <h3>5</h3>
+      </div></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h6 class="card-title">Tests</h6>
+        </div>
+        <div class="card-body">
+          <div class="">
+            <canvas id='parent-analysis' width='115' height='90'></canvas>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div><small data-tooltip='0%'>
+            <b>39</b> tests passed
+            </small>
+          </div>
+          <div>
+            <small data-tooltip='0%'><b>5</b> tests failed, 
+            <b>0</b> skipped, <b data-tooltip='0%'>0</b> others
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h6 class="card-title">Log events</h6>
+        </div>
+        <div class="card-body">
+          <div class="">
+            <canvas id='events-analysis' width='115' height='90'></canvas>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div><small data-tooltip='0%'><b>39</b> events passed</small></div>
+          <div>
+            <small data-tooltip='0%'><b>5</b> events failed, 
+            <b data-tooltip='%'>255</b> others
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row"><div class="col-md-12">
+    <div class="card"><div class="card-header"><p>Timeline</p></div>
+      <div class="card-body pt-0"><div>
+        <canvas id="timeline" height="120"></canvas>
+      </div></div>
+    </div>
+  </div></div>
+  <script>
+	var timeline = { "Step1_ColdRequest_ResponseTimeShouldBeLessThan800ms":880.1302,"Step2_WarmRequests_AllShouldReturn200AndBeLessThan500ms":2768.5183,"Step3_AverageResponseTime_ShouldBeLessThan500ms":2595.3177,"Step1_ComplexQuery_ResponseTimeShouldBeLessThan2000ms":1031.5916,"Step2_WarmRequests_ShouldBeLessThan2000ms":1629.4725,"Step3_BaselineComparison_IncreaseRatioShouldBeLessThan5x":1616.0173,"Step1_AllRequestsShouldReturn200_NoRateLimiting":5870.0485,"Step2_ResponseTimeAnalysis_MaxShouldBeLessThan1500ms":5230.9583,"Step3_SpikeCheck_ResponseBodyShouldBeComplete":5601.5165,"Step4_DegradationCheck_NoConsistentIncrease":5460.1368,"Step1_BroadKeyword_ResponseTimeShouldBeLessThan1500ms":661.8748,"Step2_SpecificKeyword_ShouldBeFasterOrEqualToBroad":1252.645,"Step3_SearchVsGames_OverheadShouldBeLessThan3x":1217.4296,"Step1_FieldsStarLimit50_ResponseTimeShouldBeLessThan3000ms":1037.788,"Step2_BaselineRatio_ShouldBeLessThan15x":1255.8345,"Step3_FieldsStarLimit500_ResponseTimeShouldBeLessThan10000ms":2447.0531,"Step4_StabilityCheck_NoTimeouts":3643.8374,"Step1_SearchCharacter_ShouldReturnMarioRelatedResults":283.1391,"Step2_FieldValidation_IdAndNameShouldBeValid":657.745,"Step1_NestedMugShot_UrlShouldBeValidIfPresent":646.7217,"Step2_SpeciesEnum_ShouldBeWithinRange1To5":705.865,"Step3_AlternativeNames_AkasShouldBeArrayIfPresent":710.3588,"Step1_EmptySearchString_ShouldReturn400":689.8831,"Step2_OutOfEnumSpecies_ShouldReturn400":307.574,"Step1_ResponseStructure_ShouldBeArrayOfValidGenres":643.2497,"Step2_Consistency_SameResultsAcross3Calls":1514.6254,"Step1_FilterCategory1Console_AllShouldHaveCategory1":641.1059,"Step2_CrossCheckCategory5_ShouldBeDistinctFromCategory1":883.0131,"Step1_ResponseStructure_FieldTypesShouldBeValid":654.5911,"Step2_FilterNintendo_ShouldReturnCorrectData":649.4008,"Step3_CrossCheckGame_GameIdShouldExist":862.9331,"Step1_ResponseStructure_IdNameLocaleShouldBeValid":311.4017,"Step2_FilterLocaleEnGB_ShouldReturnEnglish":640.3373,"Step3_CrossCheckLanguageSupports_ShouldHaveLanguageField":360.4503,"Step1_StructureAndEnum_IdShouldBeWithinRange1To7":641.7093,"Step2_CrossCheckGames_FirstPersonGamesShouldContainId1":736.7918,"Step3_VRCheck_ShouldReturnArrayWithoutError":383.3103,"Step1_ResponseStructure_FieldsShouldHaveCorrectTypes":653.1966,"Step2_FilterAndSort_Type1ShouldBeDescending":662.5228,"Step3_CrossCheckGameId_GameShouldExist":770.069,"Step4_DataFreshness_StructureShouldBeConsistent":1260.4042,"Step1_ResponseStructure_ShouldBeArrayOfValidCollections":884.3042,"Step2_SearchMario_ShouldReturnRelatedCollections":392.502,"Step3_FilterType1_AllShouldHaveType1":323.7804 };
+  </script>
+  <div class="row">
+      <div class="col-md-4 sysenv-container">
+      <div class="card">
+        <div class="card-header"><p>System/Environment</p></div>
+        <div class="card-body pb-0 pt-0"><table class="table table-sm table-bordered">
+          <thead><tr class="bg-gray"><th>Name</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Người thực hiện</td>
+              <td>Võ Đăng Khoa</td>
+            </tr>
+            <tr>
+              <td>Hệ điều hành</td>
+              <td>Microsoft Windows NT 10.0.26200.0</td>
+            </tr>
+            <tr>
+              <td>API Base URL</td>
+              <td>https://api.igdb.com/v4</td>
+            </tr>
+            <tr>
+              <td>Framework</td>
+              <td>NUnit + HttpClient</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  var statusGroup = {
+    parentCount: 44,
+    childCount: 0,
+    grandChildCount: 0,
+    eventsCount: 299,
+
+passParent:39,failParent:5,warningParent:0,skipParent:0,    
+passChild:0,failChild:0,warningChild:0,skipChild:0,infoChild:0,    
+passGrandChild:0,failGrandChild:0,warningGrandChild:0,skipGrandChild:0,infoGrandChild:0,    
+passEvents:39,failEvents:5,warningEvents:0,skipEvents:0,infoEvents:255,  };
+</script>
+
+    </div>
+   </div>
+  </div>
+ </div>
+ <script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@c439bdbc7bade3d85af3b90e9e69c30ebc87445f/spark/js/spark-script.js"></script>
+<script type='text/javascript'></script>
+</body>
+</html>

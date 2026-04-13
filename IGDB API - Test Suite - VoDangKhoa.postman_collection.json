@@ -1,0 +1,2444 @@
+{
+  "info": {
+    "_postman_id": "844b7491-f601-4f83-827b-01c43747f23d",
+    "name": "IGDB API - Test Suite - VoDangKhoa",
+    "description": "This collection is a structured test suite for validating the IGDB API across multiple endpoints, with a focus on functional correctness, data consistency, filtering behavior, response structure, and basic performance checks.\n\nIt includes organized test cases for resources such as games, genres, platforms, companies, characters, languages, player perspectives, popularity primitives, collections, reports, and search. The requests cover common validation scenarios including response schema checks, field optionality, enum verification, filtering, search behavior, cross-endpoint data checks, and repeated consistency testing.\n\nThe collection also contains performance-oriented scenarios such as cold vs. warm requests, complex query timing, search performance, stress runs, and large payload checks. Overall, it serves as a practical QA and exploratory testing suite for assessing both data quality and response behavior of the IGDB API.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "45621962",
+    "_collection_link": "https://go.postman.co/collection/45621962-844b7491-f601-4f83-827b-01c43747f23d?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "TC1.01_Perf_01 - Response Time Simple",
+      "item": [
+        {
+          "name": "[Cold request] /games",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", ()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"Response time ≤ 800ms (cold)\", ()=>{\r",
+                  "  pm.expect(pm.response.responseTime).to.be.below(800);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, name; limit 10;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/games",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "games"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[Warm request × 4 — dùng Runner] /games",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", ()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"Response time ≤ 500ms\", ()=>{\r",
+                  "  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                  "});\r",
+                  "const times = JSON.parse(pm.environment.get(\"perf1_times\")||\"[]\");\r",
+                  "times.push(pm.response.responseTime);\r",
+                  "pm.environment.set(\"perf1_times\", JSON.stringify(times));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, name; limit 10;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/games",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "games"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "TC1.02_Perf_02 - Response Time Complex",
+      "item": [
+        {
+          "name": "[Complex query] /games",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", ()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"Response time ≤ 2000ms\", ()=>{ \r",
+                  "  pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+                  "});\r",
+                  "pm.test(\"Trả về 100 records\", ()=>{\r",
+                  "  pm.expect(pm.response.json().length).to.equal(100);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, name, cover.url, genres.name, platforms.name,\r\n  involved_companies.company.name, rating, summary,\r\n  first_release_date; limit 100;"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/games",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "games"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[Warm × 2] /games",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", ()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"Response time ≤ 2000ms\", ()=>{\r",
+                  "  pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, name, cover.url, genres.name, platforms.name,\r\n  involved_companies.company.name, rating, summary,\r\n  first_release_date; limit 100;"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/games",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "games"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "TC1.03_Perf_03 - Stress 10x",
+      "item": [
+        {
+          "name": "[Stress request × 10 — Runner] /games",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", ()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"Không phải 429/5xx\", ()=>{\r",
+                  "  pm.expect(pm.response.code).to.not.be.oneOf([429,500,502,503]);\r",
+                  "});\r",
+                  "pm.test(\"Response time ≤ 1500ms\", ()=>{\r",
+                  "  pm.expect(pm.response.responseTime).to.be.below(1500);\r",
+                  "});\r",
+                  "const times = JSON.parse(pm.environment.get(\"stress_times\")||\"[]\");\r",
+                  "times.push(pm.response.responseTime);\r",
+                  "pm.environment.set(\"stress_times\", JSON.stringify(times));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, name, rating; limit 20;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/games",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "games"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "TC1.04_Perf_04 - Search Performance",
+      "item": [
+        {
+          "name": "[Từ khóa rộng \"a\"] /search",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", ()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"Response time ≤ 1500ms\", ()=>{\r",
+                  "  pm.expect(pm.response.responseTime).to.be.below(1500);\r",
+                  "});\r",
+                  "pm.environment.set(\"search_wide_ms\", pm.response.responseTime);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields name, game; search \"a\"; limit 50;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/search",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "search"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[Từ khóa cụ thể \"Mario Kart\"] /search",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", ()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"Response time ≤ 1500ms\", ()=>{\r",
+                  "  pm.expect(pm.response.responseTime).to.be.below(1500);\r",
+                  "});\r",
+                  "pm.test(\"Cụ thể ≤ rộng\", ()=>{\r",
+                  "  const wide = parseInt(pm.environment.get(\"search_wide_ms\")||\"9999\");\r",
+                  "  pm.expect(pm.response.responseTime).to.be.at.most(wide);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields name, game; search \"Mario Kart\"; limit 50;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/search",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "search"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "TC1.05_Perf_05 - Fields Star Payload Copy",
+      "item": [
+        {
+          "name": "[fields * limit 50] /games",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", ()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"Response time ≤ 3000ms\", ()=>{\r",
+                  "  pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+                  "});\r",
+                  "pm.test(\"Trả về 50 records\", ()=>{\r",
+                  "  pm.expect(pm.response.json().length).to.equal(50);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields *; limit 50;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/games",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "games"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[fields * limit 500] /games",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", ()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"Response time ≤ 10000ms\", ()=>{\r",
+                  "  pm.expect(pm.response.responseTime).to.be.below(10000);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields *; limit 500;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/games",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "games"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "TC1.06_CHARS_01 - Characters",
+      "item": [
+        {
+          "name": "[Search character Mario] /characters",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", ()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"Có kết quả\", ()=> pm.expect(pm.response.json().length).to.be.above(0));\r",
+                  "pm.test(\"id và name hợp lệ\", ()=>{\r",
+                  "  pm.response.json().forEach(c=>{\r",
+                  "    pm.expect(c.id).to.be.a('number');\r",
+                  "    pm.expect(c.name).to.be.a('string');\r",
+                  "  });\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, name, gender, description, games; search \"Mario\"; limit 5;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/characters",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "characters"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[Kiểm tra fields optional] /characters",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", ()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"Có kết quả\", ()=> pm.expect(pm.response.json().length).to.be.above(0));\r",
+                  "pm.test(\"id và name hợp lệ\", ()=>{\r",
+                  "  pm.response.json().forEach(c=>{\r",
+                  "    pm.expect(c.id).to.be.a('number');\r",
+                  "    pm.expect(c.name).to.be.a('string');\r",
+                  "  });\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, name, gender, description, games; search \"Mario\"; limit 5;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/characters",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "characters"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "TC1.07_CHARS_02 - Characters",
+      "item": [
+        {
+          "name": "[Nested mug_shot] /characters",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\",()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"mug_shot url hợp lệ nếu có\",()=>{\r",
+                  "  pm.response.json().forEach(c=>{\r",
+                  "    if(c.mug_shot){\r",
+                  "      pm.expect(c.mug_shot.url).to.be.a('string').and.include('//');\r",
+                  "      pm.expect(c.mug_shot.width).to.be.a('number').and.above(0);\r",
+                  "    }\r",
+                  "  });\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, name, mug_shot.image_id, mug_shot.url, mug_shot.width, mug_shot.height; limit 5;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/characters",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "characters"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[Species enum] /characters",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\",()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"species trong range 1-5\",()=>{\r",
+                  "  pm.response.json().forEach(c=>{\r",
+                  "    if(c.species!==undefined) pm.expect(c.species).to.be.within(1,5);\r",
+                  "  });\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, name, species; where species != null; limit 5;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/characters",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "characters"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[AKAs optional] /characters",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\",()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"akas là array nếu có\",()=>{\r",
+                  "  pm.response.json().forEach(c=>{\r",
+                  "    if(c.akas!==undefined) pm.expect(c.akas).to.be.an('array');\r",
+                  "  });\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, name, akas; limit 5;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/characters",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "characters"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "TC1.08_CHARS_03 - Characters",
+      "item": [
+        {
+          "name": "[Search ký tự rỗng \"\"] /characters",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// TC này kiểm tra INPUT VALIDATION: search \"\" phải bị từ chối với 400\r",
+                  "// Nếu API trả 200 → đây là BUG (thiếu validation) → test FAIL đúng chuẩn\r",
+                  "\r",
+                  "pm.test(\"Phải trả 400 khi search term là chuỗi rỗng\", () => {\r",
+                  "  pm.expect(pm.response.code).to.equal(400,\r",
+                  "    `API trả ${pm.response.code} thay vì 400 — thiếu input validation cho search rỗng`\r",
+                  "  );\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response body phải có error message rõ ràng\", () => {\r",
+                  "  const body = pm.response.json();\r",
+                  "  pm.expect(body).to.not.be.an('array',\r",
+                  "    \"Body không được là array — phải là error payload khi search rỗng\"\r",
+                  "  );\r",
+                  "  pm.expect(body).to.have.property('message',\r",
+                  "    undefined,\r",
+                  "    \"Response phải có trường message mô tả lỗi input\"\r",
+                  "  );\r",
+                  "});\r",
+                  "\r",
+                  "// Log để ghi vào cột Actual Results trong Excel\r",
+                  "console.log(\"[ACTUAL] HTTP status:\", pm.response.code);\r",
+                  "console.log(\"[ACTUAL] Body:\", pm.response.text().slice(0, 200));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "Body: fields id, name; search \"\"; limit 5;\t\t\t\t\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/characters",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "characters"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[species ngoài enum — where species = 99] /characters",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "\r",
+                  "pm.test(\"Phải trả 400 khi species ngoài enum hợp lệ (1-5)\", () => {\r",
+                  "  pm.expect(pm.response.code).to.equal(400,\r",
+                  "    `API trả ${pm.response.code} thay vì 400 — không validate enum range cho species`\r",
+                  "  );\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response body phải có error message về enum không hợp lệ\", () => {\r",
+                  "  const body = pm.response.json();\r",
+                  "  pm.expect(body).to.not.be.an('array',\r",
+                  "    \"Body không được là array — species=99 ngoài enum phải trả error payload\"\r",
+                  "  );\r",
+                  "  pm.expect(body).to.have.property('message',\r",
+                  "    undefined,\r",
+                  "    \"Phải có message mô tả species enum value không hợp lệ\"\r",
+                  "  );\r",
+                  "});\r",
+                  "\r",
+                  "// Log actual để điền vào cột Actual Results trong Excel\r",
+                  "console.log(\"[ACTUAL] HTTP status:\", pm.response.code);\r",
+                  "console.log(\"[ACTUAL] Body:\", pm.response.text().slice(0, 200));\r",
+                  "console.log(\"[BUG NOTE] IGDB không validate enum range — species=99 được chấp nhận silently\");"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, name, species; where species = 99; limit 5;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/characters",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "characters"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "TC1.09_GENRES_01 - Genres",
+      "item": [
+        {
+          "name": "[Cấu trúc response] /genres",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", ()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"Là array ≤ 20\", ()=>{\r",
+                  "  const d = pm.response.json();\r",
+                  "  pm.expect(d).to.be.an('array');\r",
+                  "  pm.expect(d.length).to.be.at.most(20);\r",
+                  "});\r",
+                  "pm.test(\"Fields đúng kiểu\", ()=>{\r",
+                  "  pm.response.json().forEach(g=>{\r",
+                  "    pm.expect(g.id).to.be.a('number');\r",
+                  "    pm.expect(g.name).to.be.a('string');\r",
+                  "    if(g.slug) pm.expect(g.slug).to.be.a('string');\r",
+                  "  });\r",
+                  "});\r",
+                  "pm.environment.set(\"genres_snap\", JSON.stringify(pm.response.json().map(g=>g.id)));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, name, slug; limit 20;"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/genres",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "genres"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[Tính nhất quán - lần 2] /genres",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", ()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"Kết quả nhất quán\", ()=>{\r",
+                  "  const snap = JSON.parse(pm.environment.get(\"genres_snap\")||\"[]\");\r",
+                  "  const cur  = pm.response.json().map(g=>g.id);\r",
+                  "  pm.expect(JSON.stringify(cur)).to.equal(JSON.stringify(snap));\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, name, slug; limit 20;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/genres",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "genres"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[Tính nhất quán - lần 3] /genres",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", ()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"Kết quả nhất quán lần 3\", ()=>{\r",
+                  "  const snap = JSON.parse(pm.environment.get(\"genres_snap\")||\"[]\");\r",
+                  "  const cur  = pm.response.json().map(g=>g.id);\r",
+                  "  pm.expect(JSON.stringify(cur)).to.equal(JSON.stringify(snap));\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, name, slug; limit 20;"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/genres",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "genres"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "TC1.10_PLATFORMS_01 - Flatforms",
+      "item": [
+        {
+          "name": "[Filter category=1 Console] /platforms",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", ()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"Tất cả category = 1\", ()=>{\r",
+                  "  pm.response.json().forEach(p=>{\r",
+                  "    pm.expect(p.category).to.equal(1);\r",
+                  "    pm.expect(p.name).to.be.a('string').and.not.empty;\r",
+                  "  });\r",
+                  "});\r",
+                  "pm.environment.set(\"plat_cat1_ids\", JSON.stringify(pm.response.json().map(p=>p.id)));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, name, category, slug; where category = 1; limit 10;"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/platforms",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "platforms"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[Cross-check category=5 Portable] /platforms",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", ()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"Tất cả category = 5\", ()=>{\r",
+                  "  pm.response.json().forEach(p=> pm.expect(p.category).to.equal(5));\r",
+                  "});\r",
+                  "pm.test(\"Không trùng với category 1\", ()=>{\r",
+                  "  const cat1 = JSON.parse(pm.environment.get(\"plat_cat1_ids\")||\"[]\");\r",
+                  "  const cat5 = pm.response.json().map(p=>p.id);\r",
+                  "  pm.expect(cat5.filter(id=> cat1.includes(id)).length).to.equal(0);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, name, category, slug; where category = 5; limit 10;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/platforms",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "platforms"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "TC1.11_COMPANIES_01 - Companies",
+      "item": [
+        {
+          "name": "[Cấu trúc response] /companies",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", ()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"country là number (ISO)\", ()=>{\r",
+                  "  pm.response.json().forEach(c=>{\r",
+                  "    if(c.country!==undefined) pm.expect(c.country).to.be.a('number');\r",
+                  "    if(c.developed!==undefined) pm.expect(c.developed).to.be.an('array');\r",
+                  "    if(c.published!==undefined) pm.expect(c.published).to.be.an('array');\r",
+                  "  });\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, name, country, developed, published, start_date; limit 10;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/companies",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "companies"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[Filter Nintendo] /companies",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", ()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"Trả về Nintendo\", ()=>{\r",
+                  "  const c = pm.response.json()[0];\r",
+                  "  pm.expect(c.name).to.equal('Nintendo');\r",
+                  "  pm.expect(c.country).to.equal(392);\r",
+                  "});\r",
+                  "const devIds = pm.response.json()[0]?.developed || [];\r",
+                  "if(devIds.length) pm.environment.set(\"nintendo_game_id\", devIds[0]);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, name, country, developed; where name = \"Nintendo\"; limit 1;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/companies",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "companies"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[Cross-check /games by ID] /games",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", ()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"Game tồn tại\", ()=>{\r",
+                  "  const d = pm.response.json();\r",
+                  "  pm.expect(d.length).to.equal(1);\r",
+                  "  pm.expect(d[0].id).to.equal(\r",
+                  "    parseInt(pm.environment.get(\"nintendo_game_id\"))\r",
+                  "  );\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, name, involved_companies; where id = {{nintendo_game_id}}; limit 1;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/games",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "games"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "TC1.12_LANG_01 - Languages",
+      "item": [
+        {
+          "name": "[Cấu trúc response] /languages",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\",()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"Là array\",()=> pm.expect(pm.response.json()).to.be.an('array'));\r",
+                  "pm.test(\"id và name hợp lệ\",()=>{\r",
+                  "  pm.response.json().forEach(l=>{\r",
+                  "    pm.expect(l.id).to.be.a('number');\r",
+                  "    pm.expect(l.name).to.be.a('string').and.not.empty;\r",
+                  "    if(l.locale) pm.expect(l.locale.length).to.be.at.least(2);\r",
+                  "  });\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, name, native_name, locale; limit 20;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/languages",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "languages"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[Filter locale=en] /languages",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\",()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"Trả về đúng 1 English\",()=>{\r",
+                  "  const d = pm.response.json();\r",
+                  "  pm.expect(d.length).to.equal(1);\r",
+                  "  pm.expect(d[0].locale).to.equal('en-GB');\r",
+                  "  pm.expect(d[0].name).to.include('English');\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, name, locale; where locale = \"en-GB\"; limit 1;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/languages",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "languages"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[Cross-check /language_supports] /language_supports",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\",()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"Có trường language\",()=>{\r",
+                  "  const d = pm.response.json();\r",
+                  "  if(d.length>0) pm.expect(d[0]).to.have.property('language');\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, language; limit 1;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/language_supports",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "language_supports"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "TC1.13_PP_01 - Player Perspectives",
+      "item": [
+        {
+          "name": "[Cấu trúc và enum] /player_perspectives",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\",()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"ID trong range 1-7\",()=>{\r",
+                  "  pm.response.json().forEach(p=>{\r",
+                  "    pm.expect(p.id).to.be.within(1,7);\r",
+                  "    pm.expect(p.name).to.be.a('string').and.not.empty;\r",
+                  "  });\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, name, slug; limit 10;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/player_perspectives",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "player_perspectives"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[Cross-check First Person] /games",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\",()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"player_perspectives chứa ID 1\",()=>{\r",
+                  "  pm.response.json().forEach(g=>{\r",
+                  "    pm.expect(g.player_perspectives).to.include(1);\r",
+                  "  });\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, name, player_perspectives; where player_perspectives = (1); limit 5;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/games",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "games"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[Check VR enum=7] /games",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\",()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"Không có lỗi (array rỗng hoặc có dữ liệu)\",()=>{\r",
+                  "  pm.expect(pm.response.json()).to.be.an('array');\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, name, player_perspectives; where player_perspectives = (7); limit 3;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/games",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "games"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "TC1.14_POPPRIM_01 - Popularity Primitives",
+      "item": [
+        {
+          "name": "[Cấu trúc response] /popularity_primitives",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\",()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"Fields đúng kiểu\",()=>{\r",
+                  "  pm.response.json().forEach(p=>{\r",
+                  "    pm.expect(p.game_id).to.be.a('number');\r",
+                  "    pm.expect(p.popularity_type).to.be.within(1,6);\r",
+                  "    pm.expect(p.value).to.be.a('number').and.at.least(0);\r",
+                  "  });\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields game_id, popularity_type, value; limit 10;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/popularity_primitives",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "popularity_primitives"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[Filter type=1 sort desc] /popularity_primitives",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+                  "\r",
+                  "pm.test(\"Tất cả popularity_type = 1\", () => {\r",
+                  "  pm.response.json().forEach(p =>\r",
+                  "    pm.expect(p.popularity_type).to.equal(1)\r",
+                  "  );\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Value giảm dần (sort desc)\", () => {\r",
+                  "  const d = pm.response.json();\r",
+                  "  for (let i = 1; i < d.length; i++) {\r",
+                  "    pm.expect(d[i - 1].value).to.be.at.least(d[i].value);\r",
+                  "  }\r",
+                  "});\r",
+                  "\r",
+                  "// Lưu game_id của record đầu tiên để dùng cho cross-check step sau\r",
+                  "const top = pm.response.json()[0];\r",
+                  "if (top) {\r",
+                  "  pm.environment.set(\"pop_top_game_id\", top.game_id);\r",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields game_id, popularity_type, value; where popularity_type = 1; sort value desc; limit 5;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/popularity_primitives",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "popularity_primitives"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[Cross-check game_id] /games",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\",()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"Game tồn tại\",()=>{\r",
+                  "  const d = pm.response.json();\r",
+                  "  pm.expect(d.length).to.equal(1);\r",
+                  "  pm.expect(d[0].name).to.be.a('string').and.not.empty;\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, name; where id = {{pop_top_game_id}}; limit 1;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/games",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "games"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[Tính nhất quán]/popularity_primitives",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+                  "\r",
+                  "pm.test(\"Tính nhất quán: các field yêu cầu đều có mặt\", () => {\r",
+                  "  const d = pm.response.json();\r",
+                  "\r",
+                  "  // Nếu array rỗng thì bỏ qua (không phải lỗi nhất quán)\r",
+                  "  if (d.length === 0) return;\r",
+                  "\r",
+                  "  d.forEach((item, idx) => {\r",
+                  "    // .include.keys() — chỉ assert key CÓ MẶT, không quan tâm key thừa\r",
+                  "    pm.expect(item).to.include.keys('game_id', 'popularity_type', 'value');\r",
+                  "\r",
+                  "    // Kiểm tra kiểu dữ liệu từng field\r",
+                  "    pm.expect(item.game_id,\r",
+                  "      `item[${idx}].game_id phải là number`\r",
+                  "    ).to.be.a('number').and.above(0);\r",
+                  "\r",
+                  "    pm.expect(item.popularity_type,\r",
+                  "      `item[${idx}].popularity_type phải là number`\r",
+                  "    ).to.be.a('number');\r",
+                  "\r",
+                  "    pm.expect(item.value,\r",
+                  "      `item[${idx}].value phải là number`\r",
+                  "    ).to.be.a('number').and.at.least(0);\r",
+                  "  });\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Số lượng records nhất quán (≤ 5 vì limit=5)\", () => {\r",
+                  "  pm.expect(pm.response.json().length).to.be.at.most(5);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields game_id, popularity_type, value; where popularity_type = 1; sort value desc; limit 5;\r\n",
+              "options": {
+                "raw": {
+                  "language": "text"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/popularity_primitives",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "popularity_primitives"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "TC1.15_COLL_01 - Collections",
+      "item": [
+        {
+          "name": "[Cấu trúc response] /collections",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", ()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"id, name, slug hợp lệ — games là array\", ()=>{\r",
+                  "  pm.response.json().forEach(c=>{\r",
+                  "    pm.expect(c.id).to.be.a('number').and.above(0);\r",
+                  "    pm.expect(c.name).to.be.a('string').and.not.empty;\r",
+                  "    if(c.slug) pm.expect(c.slug).to.be.a('string');\r",
+                  "    if(c.games) pm.expect(c.games).to.be.an('array');\r",
+                  "  });\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, name, slug, games, type; limit 10;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/collections",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "collections"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[Search \"Mario\"] /collections",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", ()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"Ít nhất 1 collection liên quan Mario\", ()=>{\r",
+                  "  const d = pm.response.json();\r",
+                  "  pm.expect(d.length).to.be.above(0);\r",
+                  "  const hit = d.some(c=>\r",
+                  "    c.name.toLowerCase().includes('mario'));\r",
+                  "  pm.expect(hit).to.be.true;\r",
+                  "});\r",
+                  "const first = pm.response.json()[0];\r",
+                  "const gid   = first?.games?.[0];\r",
+                  "if(gid) pm.environment.set(\"col_game_id\", gid);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, name, games; search \"Mario\"; limit 5;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/collections",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "collections"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[Filter type=1] /collections",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", ()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"Tất cả type = 1\", ()=>{\r",
+                  "  const d = pm.response.json();\r",
+                  "  if(d.length === 0) pm.test.skip(\"Không có data type=1 — acceptable\");\r",
+                  "  d.forEach(c=> pm.expect(c.type).to.equal(1));\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, name, type; where type = 1; limit 5;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/collections",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "collections"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[Cross-check game_id — /games] /games",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", ()=> pm.response.to.have.status(200));\r",
+                  "pm.test(\"Game tồn tại\", ()=>{\r",
+                  "  pm.expect(pm.response.json().length).to.equal(1);\r",
+                  "  pm.expect(pm.response.json()[0].name).to.be.a('string');\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Client-ID",
+                "value": "{{client_id}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "fields id, name; where id = {{col_game_id}}; limit 1;\r\n"
+            },
+            "url": {
+              "raw": "https://api.igdb.com/v4/games",
+              "protocol": "https",
+              "host": [
+                "api",
+                "igdb",
+                "com"
+              ],
+              "path": [
+                "v4",
+                "games"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
