@@ -1,0 +1,902 @@
+{
+  "info": {
+    "_postman_id": "b67b0be3-960a-475c-a227-f32723956bb2",
+    "name": "Software Testing Qualification",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "47890666",
+    "_collection_link": "https://go.postman.co/collection/47890666-b67b0be3-960a-475c-a227-f32723956bb2?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Auth_01",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// 1. Kiểm tra HTTP Status Code có phải là 200 OK không\r",
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "// 2. Kiểm tra các trường dữ liệu bắt buộc trong Response Body\r",
+              "pm.test(\"Response trả về đầy đủ access_token, expires_in và token_type\", function () {\r",
+              "    \r",
+              "    var jsonData = pm.response.json();\r",
+              "\r",
+              "    // Kiểm tra xem các key này có tồn tại trong JSON hay không\r",
+              "    pm.expect(jsonData).to.have.property(\"access_token\");\r",
+              "    pm.expect(jsonData).to.have.property(\"expires_in\");\r",
+              "    \r",
+              "    pm.expect(jsonData).to.have.property(\"token_type\"); \r",
+              "});\r",
+              "\r",
+              "\r",
+              "if (pm.response.code === 200) {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    if (jsonData.access_token) {\r",
+              "        pm.environment.set(\"twitch_access_token\", jsonData.access_token);\r",
+              "        console.log(\"Đã lưu Token vào biến môi trường!\");\r",
+              "    }\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "https://id.twitch.tv/oauth2/token?client_id=bct28pbsah3wyrxeq0jgo00e8uvyy2&client_secret=n6g0hpxbvx1qpjwwnuu7jhrj7etqin&grant_type=client_credentials",
+          "protocol": "https",
+          "host": [
+            "id",
+            "twitch",
+            "tv"
+          ],
+          "path": [
+            "oauth2",
+            "token"
+          ],
+          "query": [
+            {
+              "key": "client_id",
+              "value": "bct28pbsah3wyrxeq0jgo00e8uvyy2"
+            },
+            {
+              "key": "client_secret",
+              "value": "n6g0hpxbvx1qpjwwnuu7jhrj7etqin"
+            },
+            {
+              "key": "grant_type",
+              "value": "client_credentials"
+            },
+            {
+              "key": "",
+              "value": "",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Auth_02",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// 1. Kiểm tra HTTP Status Code phải là 400 (Bad Request)\r",
+              "pm.test(\"Status code is 400 Bad Request\", function () {\r",
+              "    pm.response.to.have.status(400);\r",
+              "});\r",
+              "\r",
+              "// 2. Kiểm tra nội dung body trả về có báo lỗi thiếu client_id không\r",
+              "pm.test(\"Response báo lỗi thiếu thông tin client_id\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    \r",
+              "    // Đảm bảo response có trả về trường báo lỗi (thường là 'message' hoặc 'error')\r",
+              "    pm.expect(jsonData).to.have.property(\"message\");\r",
+              "    \r",
+              "    // Kiểm tra xem câu thông báo lỗi có chứa từ khóa 'client id' hay không \r",
+              "    // (Chuyển về chữ thường để so sánh cho chắc chắn)\r",
+              "    pm.expect(jsonData.message.toLowerCase()).to.include(\"client id\");\r",
+              "    });\r",
+              "\r",
+              "\r",
+              "if (pm.response.code === 200) {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    if (jsonData.access_token) {\r",
+              "        pm.environment.set(\"twitch_access_token\", jsonData.access_token);\r",
+              "        console.log(\"Đã lưu Token vào biến môi trường!\");\r",
+              "    }\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "https://id.twitch.tv/oauth2/token?client_id=&client_secret=n6g0hpxbvx1qpjwwnuu7jhrj7etqin&grant_type=client_credentials",
+          "protocol": "https",
+          "host": [
+            "id",
+            "twitch",
+            "tv"
+          ],
+          "path": [
+            "oauth2",
+            "token"
+          ],
+          "query": [
+            {
+              "key": "client_id",
+              "value": ""
+            },
+            {
+              "key": "client_secret",
+              "value": "n6g0hpxbvx1qpjwwnuu7jhrj7etqin"
+            },
+            {
+              "key": "grant_type",
+              "value": "client_credentials"
+            },
+            {
+              "key": "",
+              "value": "",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "AgeRating_01",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// 1. Kiểm tra HTTP Status Code phải là 200 OK\r",
+              "pm.test(\"Status code is 200 OK\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "// 2. Kiểm tra dữ liệu trả về phải là một danh sách (Array)\r",
+              "pm.test(\"Response trả về một danh sách (Array)\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    \r",
+              "    // Kiểm tra kiểu dữ liệu có phải là Array không\r",
+              "    pm.expect(Array.isArray(jsonData)).to.be.true;\r",
+              "});\r",
+              "\r",
+              "// 3. Kiểm tra danh sách có dữ liệu và đúng cấu trúc cơ bản không\r",
+              "pm.test(\"Danh sách có chứa dữ liệu hợp lệ\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    \r",
+              "    \r",
+              "    pm.expect(jsonData.length).to.be.above(0);\r",
+              "    \r",
+              "    \r",
+              "    if (jsonData.length > 0) {\r",
+              "        pm.expect(jsonData[0]).to.have.property(\"id\");\r",
+              "    }\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Client-ID",
+            "value": "bct28pbsah3wyrxeq0jgo00e8uvyy2",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{vault:bearer-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "fields *; \r\nlimit 10;",
+          "options": {
+            "raw": {
+              "language": "text"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.igdb.com/v4/age_ratings",
+          "protocol": "https",
+          "host": [
+            "api",
+            "igdb",
+            "com"
+          ],
+          "path": [
+            "v4",
+            "age_ratings"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "AgeRating_02",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// 1. Kiểm tra HTTP Status Code phải là 400 Bad Request\r",
+              "pm.test(\"Trạng thái trả về là 400 Bad Request do sai logic filter\", function () {\r",
+              "    pm.response.to.have.status(400);\r",
+              "});\r",
+              "\r",
+              "// 2. Kiểm tra Response có chứa cấu trúc báo lỗi của IGDB không\r",
+              "pm.test(\"Response body là một mảng chứa thông báo lỗi\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    \r",
+              "    // Đảm bảo phản hồi là một mảng có chứa ít nhất 1 object lỗi\r",
+              "    pm.expect(Array.isArray(jsonData)).to.be.true;\r",
+              "    pm.expect(jsonData.length).to.be.above(0);\r",
+              "});\r",
+              "\r",
+              "// 3. Kiểm tra chi tiết thông báo lỗi có nhắc đến cú pháp hoặc từ khóa liên quan không\r",
+              "pm.test(\"Thông báo lỗi chỉ ra nguyên nhân do cú pháp (Syntax Error)\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    var errorObj = jsonData[0];\r",
+              "    \r",
+              "    // Kiểm tra trường title\r",
+              "    pm.expect(errorObj).to.have.property(\"title\");\r",
+              "    pm.expect(errorObj.title.toLowerCase()).to.include(\"syntax error\");\r",
+              "    \r",
+              "    // (Tùy chọn) In lỗi ra Console để lập trình viên dễ debug\r",
+              "    console.log(\"Nguyên nhân lỗi Filter:\", errorObj.cause || errorObj.message);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Client-ID",
+            "value": "bct28pbsah3wyrxeq0jgo00e8uvyy2",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{vault:bearer-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "fileds categories; limit 10;",
+          "options": {
+            "raw": {
+              "language": "text"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.igdb.com/v4/age_ratings",
+          "protocol": "https",
+          "host": [
+            "api",
+            "igdb",
+            "com"
+          ],
+          "path": [
+            "v4",
+            "age_ratings"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "AgeRating_03",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// 1. Kiểm tra HTTP Status Code phải là 401 Unauthorized\r",
+              "pm.test(\"Status code is 401 Unauthorized\", function () {\r",
+              "    pm.response.to.have.status(401);\r",
+              "});\r",
+              "\r",
+              "// 2. Kiểm tra nội dung body trả về có chứa thông báo lỗi xác thực không\r",
+              "pm.test(\"Response body chứa thông báo lỗi thiếu Authorization\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    \r",
+              "    // Đảm bảo body trả về có chứa trường báo lỗi (thường là 'message')\r",
+              "    pm.expect(jsonData).to.have.property(\"message\");\r",
+              "    \r",
+              "    // Lấy nội dung câu thông báo và chuyển thành chữ thường để dễ so sánh\r",
+              "    var errorMessage = jsonData.message.toLowerCase();\r",
+              "    \r",
+              "    // Kiểm tra xem câu thông báo có chứa từ khóa liên quan đến xác thực không.\r",
+              "    // Dùng .satisfy để linh hoạt bắt một trong các từ khóa phổ biến mà API có thể trả về.\r",
+              "    pm.expect(errorMessage).to.satisfy(function(msg) {\r",
+              "        return msg.includes(\"unauthorized\") || \r",
+              "               msg.includes(\"authorization\") || \r",
+              "               msg.includes(\"missing token\") ||\r",
+              "               msg.includes(\"oauth\");\r",
+              "    }, \"Thông báo lỗi không chứa từ khóa liên quan đến xác thực\");\r",
+              "    \r",
+              "    // (Tùy chọn) In lỗi ra console để bạn dễ theo dõi\r",
+              "    console.log(\"Lỗi trả về từ API:\", jsonData.message);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Client-ID",
+            "value": "bct28pbsah3wyrxeq0jgo00e8uvyy2",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{vault:bearer-token}}",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "fields *; \r\nlimit 10;",
+          "options": {
+            "raw": {
+              "language": "text"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.igdb.com/v4/age_ratings",
+          "protocol": "https",
+          "host": [
+            "api",
+            "igdb",
+            "com"
+          ],
+          "path": [
+            "v4",
+            "age_ratings"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "AgeRating_04",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Kiểm tra HTTP Status Code phải là 404 hoặc 405\r",
+              "pm.test(\"Trạng thái trả về là 404 (Not Found) hoặc 405 (Method Not Allowed)\", function () {\r",
+              "    // pm.response.code lấy ra mã trạng thái hiện tại\r",
+              "    // to.be.oneOf([]) kiểm tra xem mã đó có nằm trong mảng cho trước hay không\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([404, 405]);\r",
+              "});\r",
+              "\r",
+              "// (Tùy chọn) Kiểm tra nội dung text trả về có chứa từ khóa báo lỗi\r",
+              "pm.test(\"Response body chứa thông báo lỗi phương thức hoặc đường dẫn\", function () {\r",
+              "    // Thông thường các lỗi định tuyến (routing) ở cấp độ server \r",
+              "    // có thể trả về plain text hoặc HTML thay vì JSON.\r",
+              "    var responseText = pm.response.text().toLowerCase();\r",
+              "    \r",
+              "    // Kiểm tra xem phản hồi có chứa các từ khóa báo lỗi hay không\r",
+              "    pm.expect(responseText).to.satisfy(function(text) {\r",
+              "        // Trả về true nếu chuỗi có chứa 'not found' hoặc 'not allowed' hoặc rỗng (do server cắt hẳn body)\r",
+              "        return text.includes(\"not found\") || \r",
+              "               text.includes(\"not allowed\") || \r",
+              "               text.includes(\"error\") || \r",
+              "               text.trim() === \"\";\r",
+              "    });\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Client-ID",
+            "value": "bct28pbsah3wyrxeq0jgo00e8uvyy2",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{vault:bearer-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "fields *; \r\nlimit 10;",
+          "options": {
+            "raw": {
+              "language": "text"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.igdb.com/v4/age_ratings",
+          "protocol": "https",
+          "host": [
+            "api",
+            "igdb",
+            "com"
+          ],
+          "path": [
+            "v4",
+            "age_ratings"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "AgeRating_05",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// 1. Kiểm tra HTTP Status Code phải là 404 hoặc 405 do sai Phương thức\r",
+              "pm.test(\"Server chặn request GET ngay lập tức (Status 404 hoặc 405)\", function () {\r",
+              "    // Chấp nhận pass nếu mã lỗi là 404 (Not Found) hoặc 405 (Method Not Allowed)\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([404, 405]);\r",
+              "});\r",
+              "\r",
+              "// 2. Kiểm tra Response Body không chứa dữ liệu thực tế (chỉ chứa lỗi hoặc rỗng)\r",
+              "pm.test(\"Response không chứa dữ liệu hợp lệ do request bị từ chối\", function () {\r",
+              "    var responseText = pm.response.text().toLowerCase();\r",
+              "    \r",
+              "    // Đảm bảo rằng server không vô tình trả về mảng dữ liệu (dấu hiệu của 200 OK)\r",
+              "    // Nếu request bị chặn từ vòng ngoài, body thường là text báo lỗi HTML, plain text, hoặc rỗng\r",
+              "    pm.expect(responseText).to.satisfy(function(text) {\r",
+              "        return text.includes(\"not found\") || \r",
+              "               text.includes(\"not allowed\") || \r",
+              "               text.includes(\"error\") || \r",
+              "               text.trim() === \"\" ||\r",
+              "               !text.startsWith(\"[\"); // Dữ liệu chuẩn của IGDB luôn bắt đầu bằng dấu ngoặc vuông '['\r",
+              "    }, \"Server vô tình trả về dữ liệu dù sai phương thức!\");\r",
+              "});\r",
+              "\r",
+              "// 3. (Tùy chọn) Kiểm tra thời gian phản hồi siêu nhanh\r",
+              "// Vì request bị chặn ngay tại Router/Gateway mà chưa kịp vào Database, thời gian phản hồi thường rất thấp.\r",
+              "pm.test(\"Thời gian phản hồi nhanh (dưới 500ms) do bị chặn từ sớm\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Client-ID",
+            "value": "bct28pbsah3wyrxeq0jgo00e8uvyy2",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{vault:bearer-token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://api.igdb.com/v4/age_ratings",
+          "protocol": "https",
+          "host": [
+            "api",
+            "igdb",
+            "com"
+          ],
+          "path": [
+            "v4",
+            "age_ratings"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Artwork_01",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// 1. Kiểm tra HTTP Status Code phải là 200 OK\r",
+              "pm.test(\"Trạng thái trả về là 200 OK\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "// 2. Kiểm tra dữ liệu trả về phải là một danh sách (Array)\r",
+              "pm.test(\"Response body là một danh sách (Array)\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(Array.isArray(jsonData)).to.be.true;\r",
+              "});\r",
+              "\r",
+              "// 3. Kiểm tra danh sách không bị rỗng và xác thực cấu trúc dữ liệu (Data Schema)\r",
+              "pm.test(\"Artwork có chứa các trường thông tin như tài liệu mô tả\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    \r",
+              "    // Đảm bảo danh sách trả về ít nhất 1 kết quả\r",
+              "    pm.expect(jsonData.length).to.be.above(0, \"Danh sách trả về đang bị rỗng!\");\r",
+              "    \r",
+              "    // Lấy phần tử đầu tiên ra để kiểm tra các trường (fields)\r",
+              "    var firstArtwork = jsonData[0];\r",
+              "    \r",
+              "    // Mặc định IGDB luôn trả về ID\r",
+              "    pm.expect(firstArtwork).to.have.property(\"id\");\r",
+              "    \r",
+              "    // Kiểm tra xem phần tử có chứa các trường quan trọng mà ta đã request không.\r",
+              "    // Dùng .to.include.any.keys để linh hoạt (pass nếu có ít nhất 1 trong các key này), \r",
+              "    // hoặc dùng .to.have.all.keys nếu bạn muốn bắt buộc phải có đủ.\r",
+              "    pm.expect(firstArtwork).to.include.any.keys(\"image_id\", \"url\", \"game\", \"width\", \"height\");\r",
+              "    \r",
+              "    // (Tùy chọn) Kiểm tra kiểu dữ liệu của một trường cụ thể theo Docs\r",
+              "    if (firstArtwork.url) {\r",
+              "        pm.expect(firstArtwork.url).to.be.a(\"string\"); // Docs ghi url là String\r",
+              "    }\r",
+              "    if (firstArtwork.width) {\r",
+              "        pm.expect(firstArtwork.width).to.be.a(\"number\"); // Docs ghi width là Integer\r",
+              "    }\r",
+              "});\r",
+              "\r",
+              "// 4. Kiểm tra thời gian phản hồi (Hiệu năng)\r",
+              "pm.test(\"Thời gian phản hồi dưới 1000ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Client-ID",
+            "value": "bct28pbsah3wyrxeq0jgo00e8uvyy2",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{vault:bearer-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "fields *;\r\nlimit 10;",
+          "options": {
+            "raw": {
+              "language": "text"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.igdb.com/v4/artworks",
+          "protocol": "https",
+          "host": [
+            "api",
+            "igdb",
+            "com"
+          ],
+          "path": [
+            "v4",
+            "artworks"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Artwork_02",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Kiểm tra HTTP Status Code phải là 404 hoặc 405\r",
+              "pm.test(\"Trạng thái trả về là 404 (Not Found) hoặc 405 (Method Not Allowed)\", function () {\r",
+              "    // pm.response.code lấy ra mã trạng thái hiện tại\r",
+              "    // to.be.oneOf([]) kiểm tra xem mã đó có nằm trong mảng cho trước hay không\r",
+              "    pm.expect(pm.response.code).to.be.oneOf([404, 405]);\r",
+              "});\r",
+              "\r",
+              "// (Tùy chọn) Kiểm tra nội dung text trả về có chứa từ khóa báo lỗi\r",
+              "pm.test(\"Response body chứa thông báo lỗi phương thức hoặc đường dẫn\", function () {\r",
+              "    // Thông thường các lỗi định tuyến (routing) ở cấp độ server \r",
+              "    // có thể trả về plain text hoặc HTML thay vì JSON.\r",
+              "    var responseText = pm.response.text().toLowerCase();\r",
+              "    \r",
+              "    // Kiểm tra xem phản hồi có chứa các từ khóa báo lỗi hay không\r",
+              "    pm.expect(responseText).to.satisfy(function(text) {\r",
+              "        // Trả về true nếu chuỗi có chứa 'not found' hoặc 'not allowed' hoặc rỗng (do server cắt hẳn body)\r",
+              "        return text.includes(\"not found\") || \r",
+              "               text.includes(\"not allowed\") || \r",
+              "               text.includes(\"error\") || \r",
+              "               text.trim() === \"\";\r",
+              "    });\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Client-ID",
+            "value": "bct28pbsah3wyrxeq0jgo00e8uvyy2",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{vault:bearer-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "fields *;\r\nlimit 10;",
+          "options": {
+            "raw": {
+              "language": "text"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.igdb.com/v4/artworks",
+          "protocol": "https",
+          "host": [
+            "api",
+            "igdb",
+            "com"
+          ],
+          "path": [
+            "v4",
+            "artworks"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Artwork_03",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// 1. Kiểm tra HTTP Status Code phải là 400 Bad Request\r",
+              "pm.test(\"Trạng thái trả về là 400 Bad Request do sai tên trường\", function () {\r",
+              "    pm.response.to.have.status(400);\r",
+              "});\r",
+              "\r",
+              "// 2. (Tùy chọn) Kiểm tra xem thông báo lỗi có chỉ đích danh trường bị sai không\r",
+              "pm.test(\"Thông báo lỗi có nhắc đến trường 'aminated' bị sai\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    var errorObj = jsonData[0];\r",
+              "    \r",
+              "    // Chi tiết lỗi thường nằm trong trường 'cause' hoặc 'message'\r",
+              "    // Lưu ý: Tùy thuộc vào phiên bản API, câu chữ có thể khác nhau, \r",
+              "    // nhưng ta ưu tiên tìm từ khóa tên trường bị sai.\r",
+              "    if (errorObj.cause) {\r",
+              "        pm.expect(errorObj.cause.toLowerCase()).to.include(\"aminated\");\r",
+              "    } else if (errorObj.message) {\r",
+              "        pm.expect(errorObj.message.toLowerCase()).to.include(\"aminated\");\r",
+              "    }\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Client-ID",
+            "value": "bct28pbsah3wyrxeq0jgo00e8uvyy2",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{vault:bearer-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "fields aminated;\r\nlimit 10;",
+          "options": {
+            "raw": {
+              "language": "text"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.igdb.com/v4/artworks",
+          "protocol": "https",
+          "host": [
+            "api",
+            "igdb",
+            "com"
+          ],
+          "path": [
+            "v4",
+            "artworks"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
